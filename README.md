@@ -3,6 +3,7 @@
 <div align="center">
 
 [![Django CI run test](https://github.com/christianwgd/trainer/actions/workflows/django-test.yml/badge.svg)](https://github.com/christianwgd/trainer/actions/workflows/django-test.yml)
+[![codecov](https://codecov.io/gh/christianwgd/trainer/graph/badge.svg?token=w4bZf9e6Eh)](https://codecov.io/gh/christianwgd/trainer)
 
 </div>
 
