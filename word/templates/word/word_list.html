@@ -14,49 +14,40 @@
 
 {% block content %}
 
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
-        {% for word in word_list %}
-            <div class="col">
-                <input type="checkbox" id="card-{{ word.id }}"/>
-                <label class="card-container" for='card-{{ word.id }}'>
-                    <div class="card-flip">
-                        <!-- Card Front -->
-                        <div class="card front">
-                            <div class="card-text mt-4">
-                                <p class="large mt-2">{{ word }}</p>
-                            </div>
-                        </div>
-                        <!-- End Card Front -->
-
-                        <!-- Card Back -->
-                        <div class="card back">
-                            <div class="card-text mt-2">
-                                <p class="small">{{ word }}</p>
-                                <p class="large">{{ word.translation }}</p>
-                            </div>
-                        </div>
-                        <!-- End Card Back -->
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
+    {% for word in word_list %}
+    <div class="col">
+        <input type="checkbox" id="card-{{ word.id }}"/>
+        <label class="card-container" for='card-{{ word.id }}'>
+            <div class="card-flip">
+                <!-- Card Front -->
+                <div class="card front">
+                    <div class="card-text mt-4">
+                        <p class="large mt-2">{{ word }}</p>
                     </div>
                 </div>
-                <!-- End Card -->
+                <!-- End Card Front -->
 
-{#                <div class="flip-card card">#}
-{#                    <div class="flip-card-inner">#}
-{#                        <div class="flip-card-front">#}
-{#                            <div class="card-text mt-4">#}
-{#                                <p class="large">{{ word }}</p>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        <div class="flip-card-back">#}
-{#                            <div class="card-text mt-1">#}
-{#                                <p class="small">{{ word }}</p>#}
-{#                                <p class="large">{{ word.translation }}</p>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-        {% endfor %}
+                <!-- Card Back -->
+                <div class="card back">
+                    <div class="card-text mt-2">
+                        <p class="small">{{ word }}</p>
+                        <p class="large">{{ word.translation }}</p>
+                    </div>
+                </div>
+                <!-- End Card Back -->
+            </div>
+        </label>
     </div>
+    <!-- End Card -->
+    {% endfor %}
+</div>
 
+<div class="row mt-3">
+    <div class="col">
+    {% if is_paginated %}
+        {% bootstrap_pagination page_obj extra=request.GET.urlencode size="sm" %}
+    {% endif %}
+    </div>
+</div>
 {% endblock %}

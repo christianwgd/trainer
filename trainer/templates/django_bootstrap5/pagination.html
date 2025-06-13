@@ -1,4 +1,4 @@
-{% load i18n django_bootstrap5 %}
+{% load i18n django_bootstrap5 bootstrap_icons %}
 {% with bpurl=bootstrap_pagination_url|default:"" %}
 
     <ul class="{{ pagination_css_classes }}">
@@ -11,14 +11,14 @@
 
         <li class="prev page-item{% if current_page == 1 %} disabled{% endif %}">
             <a class="page-link" href="{% if current_page == 1 %}#{% else %}{% bootstrap_url_replace_param bpurl parameter_name 1 %}{% endif %}">
-                <i class="fas fa-chevron-double-left"></i>
+                {% bs_icon 'chevron-bar-left' %}
             </a>
         </li>
 
         {% if pages_back %}
             <li class="page-item">
                 <a class="page-link" href="{% bootstrap_url_replace_param bpurl parameter_name pages_back %}">
-                    <i class="fas fa-chevron-left"></i>
+                    {% bs_icon 'chevron-left' %}
                 </a>
             </li>
         {% endif %}
@@ -34,14 +34,14 @@
         {% if pages_forward %}
             <li class="page-item">
                 <a class="page-link" href="{% bootstrap_url_replace_param bpurl parameter_name pages_forward %}">
-                    <i class="fas fa-chevron-right"></i>
+                    {% bs_icon 'chevron-right' %}
                 </a>
             </li>
         {% endif %}
 
         <li class="last page-item{% if current_page == num_pages %} disabled{% endif %}">
             <a class="page-link" href="{% if current_page == num_pages %}#{% else %}{% bootstrap_url_replace_param bpurl parameter_name num_pages %}{% endif %}">
-                <i class="fas fa-chevron-double-right"></i>
+                {% bs_icon 'chevron-bar-right' %}
             </a>
         </li>
 
