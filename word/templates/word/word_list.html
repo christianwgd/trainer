@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 i18n static %}
+
+{% block bootstrap5_extra_head %}
+{{ block.super }}
+{% endblock %}
+
+{% block bootstrap5_extra_script %}
+{{ block.super }}
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', (e) => {
+  let words = document.getElementsByClassName("word");
+  for (let index=0; index < words.length; index++) {
+      words[index].onclick = function(){
+          let translation = this.querySelector('.translation')
+          translation.style.display = 'block';
+      }
+  }
+});
+</script>
+{% endblock %}
+
+{% block page_title %}{% trans 'Vocabulary Trainer' %}{% endblock %}
+
+{% block content %}
+<div class="row mt-3">
+    <div class="col-12 text-center">
+
+        <h2>{% trans 'Translate' %}</h2>
+        {% for word in word_list %}
+            <div class="word mb-3">
+                <span class="foreign">{{ word }}</span><br/>
+                <span class="translation" style="display: none;">
+                    {{ word.translation }}
+                </span>
+            </div>
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock %}

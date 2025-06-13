@@ -11,6 +11,8 @@
 <div class="row mt-3">
     <div class="col-12 text-center">
         <h2>{% trans 'Welcome to your vocabulary trainer' %}</h2>
+
+        <a href="{% url 'word:list' %}" class="btn btn-primary" type="button">{% trans 'Start' %}</a>
     </div>
 </div>
 {% endblock %}
