@@ -2,40 +2,39 @@
 {% load django_bootstrap5 i18n static %}
 
 {% block bootstrap5_extra_head %}
-{{ block.super }}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'word/css/word.css' %}">
 {% endblock %}
 
 {% block bootstrap5_extra_script %}
-{{ block.super }}
-<script type="text/javascript">
-document.addEventListener('DOMContentLoaded', (e) => {
-  let words = document.getElementsByClassName("word");
-  for (let index=0; index < words.length; index++) {
-      words[index].onclick = function(){
-          let translation = this.querySelector('.translation')
-          translation.style.display = 'block';
-      }
-  }
-});
-</script>
+    {{ block.super }}
 {% endblock %}
 
-{% block page_title %}{% trans 'Vocabulary Trainer' %}{% endblock %}
+{% block page_title %}{% trans 'Translate' %}{% endblock %}
 
 {% block content %}
-<div class="row mt-3">
-    <div class="col-12 text-center">
 
-        <h2>{% trans 'Translate' %}</h2>
-        {% for word in word_list %}
-            <div class="word mb-3">
-                <span class="foreign">{{ word }}</span><br/>
-                <span class="translation" style="display: none;">
-                    {{ word.translation }}
-                </span>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
+    {% for word in word_list %}
+        <div class="col">
+
+            <div class="flip-card card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="card-text mt-4">
+                            <p class="large">{{ word }}</p>
+                        </div>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="card-text mt-1">
+                            <p class="small">{{ word }}</p>
+                            <p class="large">{{ word.translation }}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-        {% endfor %}
-
-    </div>
+        </div>
+    {% endfor %}
 </div>
+
 {% endblock %}
