@@ -9,7 +9,7 @@ class Language(models.Model):
         verbose_name_plural = _("Languages")
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
     name = models.CharField(_("Language"), max_length=100)
     code = models.CharField(_("Language code"), max_length=5)
@@ -23,7 +23,7 @@ class Word(models.Model):
         ordering = ['source']
 
     def __str__(self):
-        return self.source
+        return str(self.source)
 
     source = models.CharField(max_length=200, verbose_name=_('Word'))
     translation = models.CharField(max_length=200, verbose_name=_('Translation'))

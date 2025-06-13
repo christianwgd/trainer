@@ -174,7 +174,7 @@ if Path.exists(f):
     import importlib
     module_name = f"{PROJECT_APP}.localsettings"
     module = importlib.import_module(module_name)
-    module.__file__ = f
+    module.__file__ = str(f)
     sys.modules[module_name] = module
     with Path.open(f, "rb") as settings_file:
         exec(settings_file.read())  # noqa: S102
