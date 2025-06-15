@@ -33,6 +33,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/signup/', RedirectView.as_view(url='/', permanent=True)),
     path('accounts/', include('allauth.urls')),
+    path('userprofile/', include('userprofile.urls')),
     path('word/', include('word.urls')),
     path('', views.index, name='home'),
     path('favicon.ico', RedirectView.as_view(url='/static/favicon/favicon.ico')),
@@ -40,4 +41,3 @@ urlpatterns = [
 if settings.DEBUG:  # pragma: no cover
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
