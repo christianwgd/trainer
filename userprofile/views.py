@@ -16,7 +16,6 @@ class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
         """
         Returns the user profile for the currently logged-in user.
         """
-        if not self.request.user.is_authenticated:
-            logger.warning("User is not authenticated when trying to access UserProfileUpdateView.")
+        if not self.request.user:
             return None
         return UserProfile.objects.get(user=self.request.user)
