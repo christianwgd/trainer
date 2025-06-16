@@ -1,6 +1,0 @@
-[run]
-omit =
-    ./manage.py
-    */migrations/*
-    trainer/wsgi.py
-    trainer/settings.py

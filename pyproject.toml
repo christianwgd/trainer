@@ -34,5 +34,4 @@ omit = [
     "**/*migrations*/*",
     "trainer/wsgi.py",
     "trainer/asgi.py",
-    "trainer/settings.py",
 ]
