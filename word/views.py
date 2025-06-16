@@ -8,10 +8,10 @@ from word.models import Word
 
 class WordListView(LoginRequiredMixin, ListView):
     model = Word
-    paginate_by = 12
 
     def get_queryset(self):
-        return Word.objects.order_by('?')
+        amount = 20  # TODO: Make this configurable in user settings
+        return Word.objects.order_by('?')[:amount]
 
 
 class WordCreateView(LoginRequiredMixin, CreateView):

@@ -327,27 +327,27 @@ msgstr ""
 #: trainer/templates/base.html:44 trainer/templates/index.html:8
 #: trainer/urls.py:28
 msgid "Vocabulary Trainer"
-msgstr ""
+msgstr "Vokabel Trainer"
 
 #: trainer/templates/base.html:56
 msgid "Word"
-msgstr ""
+msgstr "Wort"
 
 #: trainer/templates/base.html:72
 msgid "Log out"
-msgstr ""
+msgstr "Abmelden"
 
 #: trainer/templates/base.html:77
 msgid "Settings"
-msgstr ""
+msgstr "Einstellungen"
 
 #: trainer/templates/base.html:81
 msgid "Password change"
-msgstr ""
+msgstr "Passwort ändern"
 
 #: trainer/templates/base.html:85
 msgid "Two factor authentication"
-msgstr ""
+msgstr "2-Faktor-Authentifizierung"
 
 #: trainer/templates/base.html:91
 msgid "Admin"
@@ -363,7 +363,7 @@ msgstr ""
 
 #: trainer/templates/index.html:13
 msgid "Welcome to your vocabulary trainer"
-msgstr ""
+msgstr "Willkommen zu deinem Vokabeltrainer"
 
 #: trainer/templates/index.html:15
 msgid "Start"
