@@ -71,6 +71,10 @@
                                 {% trans 'Log out' %}
                             </button>
                         </form>
+                        <a class="dropdown-item" href="{% url 'userprofile:update' %}">
+                            {% bs_icon 'gear' %}
+                            {% trans 'Settings' %}
+                        </a>
                         <a class="dropdown-item" href="{% url 'account_set_password' %}">
                             {% bs_icon 'key' %}
                             {% trans 'Password change' %}

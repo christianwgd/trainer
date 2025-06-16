@@ -18,4 +18,4 @@ class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
         """
         if not self.request.user:
             return None
-        return UserProfile.objects.get(user=self.request.user)
+        return UserProfile.objects.get(ref_usr=self.request.user)
