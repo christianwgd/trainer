@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 i18n static bootstrap_icons %}
+
+{% block bootstrap5_extra_head %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'word/css/word.css' %}">
+{% endblock %}
+
+{% block bootstrap5_extra_script %}
+    {{ block.super }}
+{% endblock %}
+
+{% block page_title %}{% trans 'New word' %}{% endblock %}
+
+{% block content %}
+<form role="form" method="post" novalidate>
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-12 col-md-6">
+            {% bootstrap_field form.source layout='floating' %}
+        </div>
+        <div class="col-12 col-md-6">
+            {% bootstrap_field form.translation layout='floating' %}
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-12">
+            <button class="btn btn-primary" type="submit">
+                {% trans 'Ok' %}
+            </button>
+            <a href="{% url 'home' %}" class="btn btn-secondary">
+                {% trans 'Cancel' %}
+            </a>
+        </div>
+    </div>
+</form>
+{% endblock %}
