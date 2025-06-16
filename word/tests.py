@@ -50,6 +50,13 @@ class TestWordForms(WordBaseTest):
         self.user = User.objects.create_user(
             username=self.fake.user_name(),
         )
+        self.user.profile.language = self.language_from
+        self.user.profile.save()
+
+    def test_word_form_init(self):
+        form = WordForm(user=self.user)
+        self.assertEqual(form.fields['source'].label, self.user.profile.learn)
+        self.assertEqual(form.fields['translation'].label, self.user.profile.language)
 
     def test_word_form_valid(self):
         data = {
