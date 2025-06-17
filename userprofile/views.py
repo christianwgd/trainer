@@ -16,6 +16,4 @@ class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
         """
         Returns the user profile for the currently logged-in user.
         """
-        if not self.request.user:
-            return None
         return UserProfile.objects.get(ref_usr=self.request.user)

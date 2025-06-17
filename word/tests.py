@@ -1,5 +1,6 @@
 from django.contrib import auth
 from django.test import TestCase
+from django.urls import reverse
 from django.utils.translation import gettext as _
 from faker import Faker
 
@@ -65,9 +66,50 @@ class TestWordForms(WordBaseTest):
         }
         form = WordForm(data=data, user=self.user)
         self.assertTrue(form.is_valid())
+        self.assertEqual(form.cleaned_data['source'], data['source'])
+        self.assertEqual(form.cleaned_data['translation'], data['translation'])
 
     def test_word_form_invalid(self):
         data = {}
         form = WordForm(data=data, user=self.user)
         self.assertFalse(form.is_valid())
         self.assertEqual(len(form.errors),2)
+
+
+class TestWordViews(WordBaseTest):
+
+    def setUp(self):
+        super().setUp()
+        self.user = User.objects.create_user(
+            username=self.fake.user_name(),
+        )
+        self.user.profile.language = self.language_from
+        self.user.profile.learn = self.language_to
+        self.user.profile.save()
+        self.client.force_login(self.user)
+
+    def test_word_list_view(self):
+        response = self.client.get(reverse('word:list'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'word/word_list.html')
+
+    def test_word_reverse_view(self):
+        response = self.client.get(reverse('word:reverse'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'word/word_reverse.html')
+
+    def test_word_create_view_get(self):
+        response = self.client.get(reverse('word:create'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'word/word_form.html')
+
+    def test_word_create_view_post(self):
+        data = {
+            'source': self.fake.word(),
+            'translation': self.fake.word(),
+            'from_lang': self.user.profile.language,
+            'to_lang': self.user.profile.learn,
+        }
+        response = self.client.post(reverse('word:create'), data)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, reverse('word:create'))

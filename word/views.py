@@ -13,6 +13,11 @@ class WordListView(LoginRequiredMixin, ListView):
         amount = 20  # TODO: Make this configurable in user settings
         return Word.objects.order_by('?')[:amount]
 
+    def get_template_names(self):
+        if self.request.path.endswith('reverse/'):
+            return ['word/word_reverse.html']
+        return ['word/word_list.html']
+
 
 class WordCreateView(LoginRequiredMixin, CreateView):
     model = Word

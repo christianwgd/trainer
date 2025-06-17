@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load django_bootstrap5 i18n static %}
+{% load django_bootstrap5 i18n static bootstrap_icons %}
 
 {% block bootstrap5_extra_head %}
 {{ block.super }}
@@ -12,7 +12,24 @@
     <div class="col-12 text-center">
         <h2>{% trans 'Welcome to your vocabulary trainer' %}</h2>
 
-        <a href="{% url 'word:list' %}" class="btn btn-primary" type="button">{% trans 'Start' %}</a>
+        <div class="row mt-3">
+            <div class="col-12">
+                <a href="{% url 'word:list' %}" class="btn btn-secondary" type="button">
+                    {{ user.profile.learn }}
+                    {% bs_icon 'arrow-right' %}
+                    {{ user.profile.language }}
+                </a>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-12">
+                <a href="{% url 'word:reverse' %}" class="btn btn-secondary" type="button">
+                    {{ user.profile.language }}
+                    {% bs_icon 'arrow-right' %}
+                    {{ user.profile.learn }}
+                </a>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
