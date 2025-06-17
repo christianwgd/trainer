@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load django_bootstrap5 i18n static %}
+{% load django_bootstrap5 i18n static bootstrap_icons %}
 
 {% block bootstrap5_extra_head %}
     {{ block.super }}
@@ -19,6 +19,10 @@
     <div class="col">
         <input type="checkbox" id="card-{{ word.id }}"/>
         <label class="card-container" for='card-{{ word.id }}'>
+            <a href="{% url 'word:update' word.id %}" target="_blank"
+               class="btn btn-sm btn-link btn-edit" id='card-{{ word.id }}'>
+                {% bs_icon 'pencil-square' %}
+            </a>
             <div class="card-flip">
                 <!-- Card Front -->
                 <div class="card front">

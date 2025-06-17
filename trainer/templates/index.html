@@ -15,18 +15,18 @@
         <div class="row mt-3">
             <div class="col-12">
                 <a href="{% url 'word:list' %}" class="btn btn-secondary" type="button">
-                    {{ user.profile.language }}
-                    {% bs_icon 'arrow-right' %}
                     {{ user.profile.learn }}
+                    {% bs_icon 'arrow-right' %}
+                    {{ user.profile.language }}
                 </a>
             </div>
         </div>
         <div class="row mt-3">
             <div class="col-12">
                 <a href="{% url 'word:reverse' %}" class="btn btn-secondary" type="button">
-                    {{ user.profile.learn }}
-                    {% bs_icon 'arrow-right' %}
                     {{ user.profile.language }}
+                    {% bs_icon 'arrow-right' %}
+                    {{ user.profile.learn }}
                 </a>
             </div>
         </div>

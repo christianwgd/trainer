@@ -40,3 +40,8 @@ class WordUpdateView(LoginRequiredMixin, UpdateView):
     model = Word
     form_class = WordForm
     success_url = reverse_lazy('home')
+
+    def get_form_kwargs(self):
+        form_kwargs = super().get_form_kwargs()
+        form_kwargs['user'] = self.request.user
+        return form_kwargs
