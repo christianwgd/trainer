@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, UpdateView
 
 from word.forms import WordForm
 from word.models import Word
@@ -34,3 +34,9 @@ class WordCreateView(LoginRequiredMixin, CreateView):
         word.from_lang = self.request.user.profile.learn
         word.to_lang = self.request.user.profile.language
         return super().form_valid(form)
+
+
+class WordUpdateView(LoginRequiredMixin, UpdateView):
+    model = Word
+    form_class = WordForm
+    success_url = reverse_lazy('home')

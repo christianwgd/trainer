@@ -48,3 +48,10 @@ p.large {
 p.small {
   margin-bottom: 4px;
 }
+
+.btn-edit {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+}

@@ -13,7 +13,11 @@ class WordForm(ModelForm):
         ]
 
     def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user')
+        if 'user' in kwargs:
+            user = kwargs.pop('user')
+        else:
+            user = None
         super().__init__(*args, **kwargs)
-        self.fields['source'].label = user.profile.learn
-        self.fields['translation'].label = user.profile.language
+        if user:
+            self.fields['source'].label = user.profile.learn
+            self.fields['translation'].label = user.profile.language

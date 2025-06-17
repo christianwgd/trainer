@@ -59,6 +59,16 @@ class TestWordForms(WordBaseTest):
         self.assertEqual(form.fields['source'].label, self.user.profile.learn)
         self.assertEqual(form.fields['translation'].label, self.user.profile.language)
 
+    def test_word_form_init_no_user(self):
+        data = {
+            'source': self.fake.word(),
+            'translation': self.fake.word(),
+            'from_lang': self.language_from,
+            'to_lang': self.language_to,
+        }
+        form = WordForm(data)
+        self.assertTrue(form.is_valid())
+
     def test_word_form_valid(self):
         data = {
             'source': self.fake.word(),
