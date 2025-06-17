@@ -25,10 +25,12 @@ class UserProfile(models.Model):
         verbose_name=_("User"), related_name='profile',
     )
     language = models.ForeignKey(
-        Language, on_delete=models.PROTECT, related_name='profiles', null=True, blank=True
+        Language, on_delete=models.PROTECT, related_name='profiles',
+        verbose_name=_('Language'), null=True, blank=True
     )
     learn = models.ForeignKey(
-        Language, on_delete=models.PROTECT, null=True, blank=True
+        Language, on_delete=models.PROTECT, related_name='learners',
+        verbose_name=_('Learning Language'), null=True, blank=True
     )
 
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-16 19:20+0200\n"
+"POT-Creation-Date: 2025-06-17 17:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,9 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
 #: word/apps.py:8 word/models.py:21 word/models.py:28
 msgid "Word"
-msgstr ""
+msgstr "Wort"
 
 #: word/models.py:8 word/models.py:14
 msgid "Language"
@@ -54,9 +55,10 @@ msgid "Cancel"
 msgstr "Abbrechen"
 
 #: word/templates/word/word_list.html:13
+#: word/templates/word/word_reverse.html:13
 msgid "Translate"
 msgstr "Übersetzen"
 
-#: word/tests.py:22
+#: word/tests.py:23
 msgid "German"
 msgstr "Deutsch"
