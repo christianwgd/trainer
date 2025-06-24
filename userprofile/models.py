@@ -36,6 +36,14 @@ class UserProfile(models.Model):
         Word, related_name='excluded_by_user',
         verbose_name=_('Excluded Words'), blank=True
     )
+    list_amount = models.PositiveIntegerField(
+        default=20, verbose_name=_('List Amount'),
+        help_text=_('Amount of words to show in the list')
+    )
+    pair_amount = models.PositiveIntegerField(
+        default=10, verbose_name=_('Pair Amount'),
+        help_text=_('Amount of word pairs to show')
+    )
 
 
 @receiver(models.signals.post_save, sender=User)

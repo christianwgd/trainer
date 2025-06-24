@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 i18n static bootstrap_icons index_tags %}
+
+{% block bootstrap5_extra_head %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'word/css/word.css' %}">
+{% endblock %}
+
+{% block bootstrap5_extra_script %}
+    {{ block.super }}
+    <script>
+    let left_selected = null;
+
+    function selectLeft(button) {
+        if ( left_selected === null ) {
+            button.classList.replace("btn-secondary", "btn-info");
+            left_selected = button;
+        } else {
+            if (button.classList.contains("btn-success")) {
+                button.classList.replace("btn-success", "btn-secondary");
+                left_selected = null;
+            }
+        }
+    }
+
+    function selectRight(button) {
+        if (left_selected) {
+            let left_word_id = left_selected.id.split("-")[1];
+            let right_word_id = button.id.split("-")[1];
+            if (left_word_id === right_word_id) {
+                button.classList.replace("btn-secondary", "btn-success");
+                left_selected.classList.replace("btn-info", "btn-success");
+            } else {
+                button.classList.replace("btn-secondary", "btn-danger");
+                left_selected.classList.replace("btn-info", "btn-danger");
+            }
+            left_selected = null;
+        }
+    }
+
+    let buttonsLeft = document.getElementsByClassName("btn-pair-source");
+    for (let index = 0; index < buttonsLeft.length; index++) {
+        buttonsLeft[index].addEventListener("click", (e) => {
+            selectLeft(buttonsLeft[index]);
+        });
+    }
+
+    let buttonsRight = document.getElementsByClassName("btn-pair-translation");
+    for (let index = 0; index < buttonsRight.length; index++) {
+        buttonsRight[index].addEventListener("click", (e) => {
+            selectRight(buttonsRight[index]);
+        });
+    }
+    </script>
+{% endblock %}
+
+{% block page_title %}{% trans 'Assign' %}{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% for word in word_list %}
+    <div class="row">
+        <div class="col-6">
+
+            <div class="row">
+                <div class="col g-3">
+                    <button class="btn btn-secondary btn-pair btn-pair-source w-100"
+                            id="left-{{ word.id }}">
+                        {% if reverse %}
+                            {{ word.translation }}
+                        {% else %}
+                            {{ word.source }}
+                        {% endif %}
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="row">
+                <div class="col g-3">
+                    {% get_item forloop.counter0 list=translate as right_word %}
+                    <button class="btn btn-secondary btn-pair btn-pair-translation w-100"
+                            id="right-{{ right_word.id }}">
+                        {% if reverse %}
+                            {{ right_word.source }}
+                        {% else %}
+                            {{ right_word.translation }}
+                        {% endif %}
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

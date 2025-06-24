@@ -21,9 +21,28 @@
                 </a>
             </div>
         </div>
-        <div class="row mt-3">
+        <div class="row mt-3 mb-4">
             <div class="col-12">
                 <a href="{% url 'word:reverse' %}" class="btn btn-secondary" type="button">
+                    {{ user.profile.language }}
+                    {% bs_icon 'arrow-right' %}
+                    {{ user.profile.learn }}
+                </a>
+            </div>
+        </div>
+        <h3>{% trans 'Word Pairs' %}</h3>
+        <div class="row mt-3">
+            <div class="col-12">
+                <a href="{% url 'word:pairs' %}" class="btn btn-secondary" type="button">
+                    {{ user.profile.learn }}
+                    {% bs_icon 'arrow-right' %}
+                    {{ user.profile.language }}
+                </a>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-12">
+                <a href="{% url 'word:pairs_reverse' %}" class="btn btn-secondary" type="button">
                     {{ user.profile.language }}
                     {% bs_icon 'arrow-right' %}
                     {{ user.profile.learn }}

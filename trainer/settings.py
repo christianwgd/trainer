@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'trainer',
     'userprofile',
     'word',
+    'django_select2',
     'allauth',
     'allauth.account',
     'allauth.mfa',
