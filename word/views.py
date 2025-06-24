@@ -1,8 +1,7 @@
-from random import shuffle
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseBadRequest, JsonResponse
+from django.http import JsonResponse
 from django.urls import reverse_lazy
-from django.views.decorators.http import require_POST, require_GET
+from django.views.decorators.http import require_GET
 from django.views.generic import ListView, CreateView, UpdateView
 
 from word.forms import WordForm
