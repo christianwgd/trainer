@@ -1,57 +1,63 @@
-input[type='checkbox'] {
-  display: none;
+input[type="checkbox"] {
+    display: none;
 }
 
 /* Flip Cards CSS */
 .card-container {
-  display: grid;
-  perspective: 1000px;
-  height: 100px;
+    display: grid;
+    perspective: 1000px;
+    height: 100px;
 }
 
 .card-flip {
-  display: grid;
-  grid-template: 1fr / 1fr;
-  grid-template-areas: "frontAndBack";
-  transform-style: preserve-3d;
-  transition: all 0.8s ease;
+    display: grid;
+    grid-template: 1fr / 1fr;
+    grid-template-areas: "frontAndBack";
+    transform-style: preserve-3d;
+    transition: all 0.8s ease;
 }
 
 .card-flip div {
-  backface-visibility: hidden;
-  transform-style: preserve-3d;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
 }
 
 .card {
-  text-align: center;
+    text-align: center;
 }
 .front {
-  grid-area: frontAndBack;
-  background-color: var(--bs-secondary-bg);
+    grid-area: frontAndBack;
+    background-color: var(--bs-secondary-bg);
 }
 
 .back {
-  grid-area: frontAndBack;
-  transform: rotateY(-180deg);
-  background-color: var(--bs-primary);
-  color: var(--bs-secondary-bg);
+    grid-area: frontAndBack;
+    transform: rotateY(-180deg);
+    background-color: var(--bs-primary);
+    color: var(--bs-secondary-bg);
 }
 
-input[type='checkbox']:checked + .card-container .card-flip {
-  transform: rotateY(180deg);
+input[type="checkbox"]:checked + .card-container .card-flip {
+    transform: rotateY(180deg);
 }
 
 p.large {
-  font-size: 1.2rem;
-  margin-bottom: 4px;
+    font-size: 1.2rem;
+    margin-bottom: 4px;
 }
 p.small {
-  margin-bottom: 4px;
+    margin-bottom: 4px;
 }
 
 .btn-edit {
     position: absolute;
     top: 0;
     right: 0;
+    z-index: 1;
+}
+.btn-ignore {
+    position: absolute;
+    top: 0;
+    left: 0;
     z-index: 1;
 }

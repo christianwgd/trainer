@@ -1,5 +1,8 @@
+from random import shuffle
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseBadRequest, JsonResponse
 from django.urls import reverse_lazy
+from django.views.decorators.http import require_POST, require_GET
 from django.views.generic import ListView, CreateView, UpdateView
 
 from word.forms import WordForm
@@ -11,7 +14,8 @@ class WordListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         amount = 20  # TODO: Make this configurable in user settings
-        return Word.objects.order_by('?')[:amount]
+        exclude = self.request.user.profile.exclude.all()
+        return Word.objects.exclude(id__in=exclude).order_by('?')[:amount]
 
     def get_template_names(self):
         if self.request.path.endswith('reverse/'):
@@ -45,3 +49,12 @@ class WordUpdateView(LoginRequiredMixin, UpdateView):
         form_kwargs = super().get_form_kwargs()
         form_kwargs['user'] = self.request.user
         return form_kwargs
+
+@require_GET
+def ignore_word(request, pk):
+    """
+    Ignore a word by excluding it with the user's profile.
+    """
+    word = Word.objects.get(pk=pk)
+    word.excluded_by_user.add(request.user.profile)
+    return JsonResponse({'status': 'Word ignored!'})

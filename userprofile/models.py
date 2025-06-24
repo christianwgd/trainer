@@ -4,7 +4,7 @@ from django.dispatch import receiver
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
-from word.models import Language
+from word.models import Language, Word
 
 
 User = auth.get_user_model()
@@ -31,6 +31,10 @@ class UserProfile(models.Model):
     learn = models.ForeignKey(
         Language, on_delete=models.PROTECT, related_name='learners',
         verbose_name=_('Learning Language'), null=True, blank=True
+    )
+    exclude = models.ManyToManyField(
+        Word, related_name='excluded_by_user',
+        verbose_name=_('Excluded Words'), blank=True
     )
 
 

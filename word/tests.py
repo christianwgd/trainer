@@ -113,3 +113,22 @@ class TestWordViews(WordBaseTest):
         response = self.client.post(reverse('word:create'), data)
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.url, reverse('word:create'))
+
+    def test_word_update_view_get(self):
+        response = self.client.get(reverse('word:update', args=[self.word.pk]))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'word/word_form.html')
+
+    def test_word_update_view_post(self):
+        data = {
+            'source': self.fake.word(),
+            'translation': self.fake.word(),
+        }
+        response = self.client.post(reverse('word:update', args=[self.word.pk]), data)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, reverse('home'))
+
+    def test_word_ignore_view(self):
+        response = self.client.get(reverse('word:ignore', args=[self.word.pk]))
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(self.word, self.user.profile.exclude.all())

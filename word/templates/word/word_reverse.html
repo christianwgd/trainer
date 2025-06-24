@@ -8,6 +8,7 @@
 
 {% block bootstrap5_extra_script %}
     {{ block.super }}
+    <script src="{% static 'word/js/ignore.js' %}"></script>
 {% endblock %}
 
 {% block page_title %}{% trans 'Translate' %}{% endblock %}
@@ -16,11 +17,18 @@
 
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
     {% for word in word_list %}
-    <div class="col">
+    <div class="col" id="col-{{ word.id }}">
         <input type="checkbox" id="card-{{ word.id }}"/>
         <label class="card-container" for='card-{{ word.id }}'>
+            <button class="btn btn-sm btn-link btn-ignore" id='ignore-{{ word.id }}'
+                    data-bs-toggle="tooltip" data-bs-placement="bottom" data-id="{{ word.id }}"
+                    data-bs-title='{% trans "Kown it, don't ask again!" %}'>
+                {% bs_icon 'x-square' %}
+            </button>
             <a href="{% url 'word:update' word.id %}" target="_blank"
-               class="btn btn-sm btn-link btn-edit" id='card-{{ word.id }}'>
+               class="btn btn-sm btn-link btn-edit" id='edit-{{ word.id }}'
+               data-bs-toggle="tooltip" data-bs-placement="bottom"
+               data-bs-title="{% trans 'Update word' %}">
                 {% bs_icon 'pencil-square' %}
             </a>
             <div class="card-flip">

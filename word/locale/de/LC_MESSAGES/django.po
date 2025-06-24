@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-17 17:11+0200\n"
+"POT-Creation-Date: 2025-06-24 15:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,47 +18,54 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: word/apps.py:8 word/models.py:21 word/models.py:28
+#: apps.py:8 models.py:21 models.py:28
 msgid "Word"
 msgstr "Wort"
 
-#: word/models.py:8 word/models.py:14
+#: models.py:8 models.py:14
 msgid "Language"
 msgstr "Sprache"
 
-#: word/models.py:9
+#: models.py:9
 msgid "Languages"
 msgstr "Sprachen"
 
-#: word/models.py:15
+#: models.py:15
 msgid "Language code"
 msgstr "Sprachenkürzel"
 
-#: word/models.py:22
+#: models.py:22
 msgid "Words"
 msgstr "Worte"
 
-#: word/models.py:29
+#: models.py:29
 msgid "Translation"
 msgstr "Übersetzung"
 
-#: word/templates/word/word_form.html:13
+#: templates/word/word_form.html:13
 msgid "New word"
 msgstr "Neues Wort"
 
-#: word/templates/word/word_form.html:30
+#: templates/word/word_form.html:30
 msgid "Ok"
 msgstr ""
 
-#: word/templates/word/word_form.html:33
+#: templates/word/word_form.html:33
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: word/templates/word/word_list.html:13
-#: word/templates/word/word_reverse.html:13
+#: templates/word/word_list.html:14 templates/word/word_reverse.html:14
 msgid "Translate"
 msgstr "Übersetzen"
 
-#: word/tests.py:23
+#: templates/word/word_list.html:25 templates/word/word_reverse.html:25
+msgid "Kown it, don't ask again!"
+msgstr "Weiss ich, nicht mehr fragen!"
+
+#: templates/word/word_list.html:31 templates/word/word_reverse.html:31
+msgid "Update word"
+msgstr "Wort ändern"
+
+#: tests.py:23
 msgid "German"
 msgstr "Deutsch"
