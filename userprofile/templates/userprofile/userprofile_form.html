@@ -4,11 +4,13 @@
 {% block bootstrap5_extra_head %}
 {{ block.super }}
 {{ form.media.css }}
+<link rel="stylesheet" type="text/css" href="{% static "userprofile/css/django-select2.css" %}" />
 <link rel="stylesheet" type="text/css" href="{% static "userprofile/css/usrprofile.css" %}" />
 {% endblock %}
 
 {% block bootstrap5_extra_script %}
 {{ block.super }}
+<script src="{% static 'userprofile/js/jquery-3.6.4.min.js' %}"></script>
 {{ form.media.js }}
 {% endblock %}
 
@@ -23,11 +25,25 @@
             {% bootstrap_form_errors form type='non_fields' %}
             <div class="row mt-3">
                 <div class="col-12 col-md-6">
+                    {% bootstrap_field form.list_amount layout='floating' %}
+                </div>
+                <div class="col-12 col-md-6">
+                    {% bootstrap_field form.pair_amount layout='floating' %}
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12 col-md-6">
                     {% bootstrap_field form.language layout='floating' %}
                 </div>
                 <div class="col-12 col-md-6">
                     {% bootstrap_field form.learn layout='floating' %}
                 </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12">
+                    {% bootstrap_field form.exclude layout='floating' %}
+                </div>
+            </div>
         </div>
     </div>
 

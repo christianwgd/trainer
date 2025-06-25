@@ -31,6 +31,7 @@ admin.site.login = secure_admin_login(admin.site.login)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("select2/", include("django_select2.urls")),
     path('accounts/signup/', RedirectView.as_view(url='/', permanent=True)),
     path('accounts/', include('allauth.urls')),
     path('userprofile/', include('userprofile.urls')),

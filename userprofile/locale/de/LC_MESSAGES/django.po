@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-17 17:11+0200\n"
+"POT-Creation-Date: 2025-06-24 17:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,35 +18,54 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: userprofile/apps.py:7
+#: apps.py:7
 msgid "User profile"
 msgstr "Benutzerprofil"
 
-#: userprofile/models.py:17
+#: models.py:17
 msgid "User setting"
 msgstr "Benutzereinstellung"
 
-#: userprofile/models.py:18
-#: userprofile/templates/userprofile/userprofile_form.html:15
+#: models.py:18 templates/userprofile/userprofile_form.html:17
 msgid "User settings"
 msgstr "Benutzereinstellungen"
 
-#: userprofile/models.py:25
+#: models.py:25
 msgid "User"
 msgstr "Benutzer"
 
-#: userprofile/models.py:29
+#: models.py:29
 msgid "Language"
 msgstr "Ausgangssprache"
 
-#: userprofile/models.py:33
+#: models.py:33
 msgid "Learning Language"
 msgstr "Lernsprache"
 
-#: userprofile/templates/userprofile/userprofile_form.html:37
+#: models.py:37
+msgid "Excluded Words"
+msgstr "Ausgeschlossene Worte"
+
+#: models.py:40
+msgid "List Amount"
+msgstr "Anzahl Worte"
+
+#: models.py:41
+msgid "Amount of words to show in the list"
+msgstr "Anzahl der anzuzeigenden Worte in der Liste"
+
+#: models.py:44
+msgid "Pair Amount"
+msgstr "Anzahl Wortpaare"
+
+#: models.py:45
+msgid "Amount of word pairs to show"
+msgstr "Anzahl der anzuzeigenden Wortpaare"
+
+#: templates/userprofile/userprofile_form.html:53
 msgid "Ok"
 msgstr ""
 
-#: userprofile/templates/userprofile/userprofile_form.html:40
+#: templates/userprofile/userprofile_form.html:56
 msgid "Cancel"
 msgstr "Abbrechen"

@@ -1,3 +1,5 @@
+from random import shuffle
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
 from django.urls import reverse_lazy
@@ -12,7 +14,7 @@ class WordListView(LoginRequiredMixin, ListView):
     model = Word
 
     def get_queryset(self):
-        amount = 20  # TODO: Make this configurable in user settings
+        amount = self.request.user.profile.list_amount
         exclude = self.request.user.profile.exclude.all()
         return Word.objects.exclude(id__in=exclude).order_by('?')[:amount]
 
@@ -20,6 +22,29 @@ class WordListView(LoginRequiredMixin, ListView):
         if self.request.path.endswith('reverse/'):
             return ['word/word_reverse.html']
         return ['word/word_list.html']
+
+
+class WordPairListView(LoginRequiredMixin, ListView):
+    model = Word
+    template_name = 'word/word_pairs.html'
+    queryset = Word.objects.none()
+
+    def get_queryset(self):
+        amount = self.request.user.profile.pair_amount
+        exclude = self.request.user.profile.exclude.all()
+        self.queryset = Word.objects.exclude(id__in=exclude).order_by('?')[:amount]
+        return self.queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        qs_copy = list(self.queryset)
+        shuffle(qs_copy)
+        context['translate'] = qs_copy
+        if self.request.path.endswith('reverse/'):
+            context['reverse'] = True
+        else:
+            context['reverse'] = False
+        return context
 
 
 class WordCreateView(LoginRequiredMixin, CreateView):
