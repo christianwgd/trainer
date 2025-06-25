@@ -32,6 +32,8 @@ class UserProfileTest(TestCase):
     def test_profile_update_view_post(self):
         self.client.force_login(self.user)
         data = {
+            'list_amount': 20,
+            'pair_amount': 10,
             'language': self.lang.id,
             'learn': self.lang.id,
         }
@@ -41,3 +43,5 @@ class UserProfileTest(TestCase):
         self.user.profile.refresh_from_db()
         self.assertEqual(self.user.profile.language, self.lang)
         self.assertEqual(self.user.profile.learn, self.lang)
+        self.assertEqual(self.user.profile.list_amount, 20)
+        self.assertEqual(self.user.profile.pair_amount, 10)
