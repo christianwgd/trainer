@@ -18,10 +18,13 @@ class WordListView(LoginRequiredMixin, ListView):
         exclude = self.request.user.profile.exclude.all()
         return Word.objects.exclude(id__in=exclude).order_by('?')[:amount]
 
-    def get_template_names(self):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         if self.request.path.endswith('reverse/'):
-            return ['word/word_reverse.html']
-        return ['word/word_list.html']
+            context['reverse'] = True
+        else:
+            context['reverse'] = False
+        return context
 
 
 class WordPairListView(LoginRequiredMixin, ListView):

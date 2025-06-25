@@ -92,11 +92,13 @@ class TestWordViews(WordBaseTest):
         response = self.client.get(reverse('word:list'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'word/word_list.html')
+        self.assertFalse(response.context['reverse'])
 
     def test_word_reverse_view(self):
         response = self.client.get(reverse('word:reverse'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'word/word_reverse.html')
+        self.assertTemplateUsed(response, 'word/word_list.html')
+        self.assertTrue(response.context['reverse'])
 
     def test_word_pair_list_view(self):
         response = self.client.get(reverse('word:pairs'))
