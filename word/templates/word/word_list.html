@@ -14,54 +14,64 @@
 {% block page_title %}{% trans 'Translate' %}{% endblock %}
 
 {% block content %}
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
-{% for word in word_list %}
-    <div class="col" id="col-{{ word.id }}">
-        <input type="checkbox" id="card-{{ word.id }}"/>
-        <label class="card-container" for='card-{{ word.id }}'>
-            <button class="btn btn-sm btn-link btn-ignore" id='ignore-{{ word.id }}'
-                    data-bs-toggle="tooltip" data-bs-placement="bottom" data-id="{{ word.id }}"
-                    data-bs-title='{% trans "Kown it, don't ask again!" %}'>
-                {% bs_icon 'x-square' %}
-            </button>
-            <a href="{% url 'word:update' word.id %}" target="_blank"
-               class="btn btn-sm btn-link btn-edit" id='edit-{{ word.id }}'
-               data-bs-toggle="tooltip" data-bs-placement="bottom"
-               data-bs-title="{% trans 'Update word' %}">
-                {% bs_icon 'pencil-square' %}
-            </a>
-            <div class="card-flip">
-                <!-- Card Front -->
-                <div class="card front">
-                    <div class="card-text mt-4">
-                        <p class="large mt-2">
-                            {% if reverse %}
-                                {{ word.translation }}
-                            {% else %}
-                                {{ word }}
-                            {% endif %}
-                        </p>
+<div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
+    {% for word in word_list %}
+        <div class="col" id="col-{{ word.id }}">
+            <input type="checkbox" id="card-{{ word.id }}"/>
+            <label class="card-container" for='card-{{ word.id }}'>
+                <button class="btn btn-sm btn-link btn-ignore" id='ignore-{{ word.id }}'
+                        data-bs-toggle="tooltip" data-bs-placement="bottom" data-id="{{ word.id }}"
+                        data-bs-title='{% trans "Kown it, don't ask again!" %}'>
+                    {% bs_icon 'x-square' %}
+                </button>
+                <a href="{% url 'word:update' word.id %}" target="_blank"
+                   class="btn btn-sm btn-link btn-edit" id='edit-{{ word.id }}'
+                   data-bs-toggle="tooltip" data-bs-placement="bottom"
+                   data-bs-title="{% trans 'Update word' %}">
+                    {% bs_icon 'pencil-square' %}
+                </a>
+                <div class="card-flip">
+                    <!-- Card Front -->
+                    <div class="card front">
+                        <div class="card-text mt-4">
+                            <p class="large mt-2">
+                                {% if reverse %}
+                                    {{ word.translation }}
+                                {% else %}
+                                    {{ word }}
+                                {% endif %}
+                            </p>
+                        </div>
                     </div>
-                </div>
-                <!-- End Card Front -->
+                    <!-- End Card Front -->
 
-                <!-- Card Back -->
-                <div class="card back">
-                    <div class="card-text mt-2">
-                        {% if reverse %}
-                            <p class="small">{{ word.translation }}</p>
-                            <p class="large">{{ word }}</p>
-                        {% else %}
-                            <p class="small">{{ word }}</p>
-                            <p class="large">{{ word.translation }}</p>
-                        {% endif %}
+                    <!-- Card Back -->
+                    <div class="card back">
+                        <div class="card-text mt-2">
+                            {% if reverse %}
+                                <p class="small">{{ word.translation }}</p>
+                                <p class="large">{{ word }}</p>
+                            {% else %}
+                                <p class="small">{{ word }}</p>
+                                <p class="large">{{ word.translation }}</p>
+                            {% endif %}
+                        </div>
                     </div>
+                    <!-- End Card Back -->
                 </div>
-                <!-- End Card Back -->
-            </div>
-        </label>
+            </label>
+        </div>
+        <!-- End Card -->
+    {% endfor %}
     </div>
-    <!-- End Card -->
-{% endfor %}
+
+    <div class="row mt-3 text-end">
+        <div class="col">
+            <button class="btn btn-secondary" type="button" onclick="location.reload();">
+                {% bs_icon 'arrow-clockwise' %}
+            </button>
+        </div>
+    </div>
 </div>
 {% endblock %}
