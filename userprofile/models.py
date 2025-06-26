@@ -57,5 +57,5 @@ def create_user_profile(sender, instance, **kwargs):
     user = instance
     profile, _created = UserProfile.objects.get_or_create(ref_usr=user)
     if _created:
-        profile.language = Language.objects.get(code=lang)
+        profile.language = Language.objects.filter(code=lang).first()
         profile.save()
