@@ -1,3 +1,4 @@
+import random
 from random import shuffle
 
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -15,8 +16,10 @@ class WordListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         amount = self.request.user.profile.list_amount
-        exclude = self.request.user.profile.exclude.all()
-        return Word.objects.exclude(id__in=exclude).order_by('?')[:amount]
+        exclude = self.request.user.profile.exclude.values_list('id', flat=True)
+        words = Word.objects.exclude(id__in=exclude).values_list('id', flat=True)
+        rand = random.sample(list(words), min(amount, len(words)))
+        return Word.objects.filter(id__in=rand)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -34,8 +37,10 @@ class WordPairListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         amount = self.request.user.profile.pair_amount
-        exclude = self.request.user.profile.exclude.all()
-        self.queryset = Word.objects.exclude(id__in=exclude).order_by('?')[:amount]
+        exclude = self.request.user.profile.exclude.values_list('id', flat=True)
+        words = Word.objects.exclude(id__in=exclude).values_list('id', flat=True)
+        rand = random.sample(list(words), min(amount, len(words)))
+        self.queryset = Word.objects.filter(id__in=rand)
         return self.queryset
 
     def get_context_data(self, **kwargs):
