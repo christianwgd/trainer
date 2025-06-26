@@ -9,97 +9,99 @@
 {% block bootstrap5_extra_script %}
     {{ block.super }}
     <script>
-    let left_selected = null;
+        let left_selected = null;
+        let right_selected = null;
 
-    function selectLeft(button) {
-        if ( left_selected === null ) {
-            button.classList.replace("btn-secondary", "btn-info");
-            left_selected = button;
-        } else {
-            if (button.classList.contains("btn-info")) {
-                button.classList.replace("btn-info", "btn-secondary");
+        function selectLeft(button) {
+            if (left_selected === null) {
+                button.classList.replace("text-bg-secondary", "text-bg-info");
+                left_selected = button;
+                if (button.classList.contains("text-bg-danger")) {
+                    button.classList.replace("text-bg-danger", "text-bg-secondary");
+                    right_selected.classList.replace("text-bg-danger", "text-bg-secondary");
+                    right_selected = null;
+                    left_selected = null;
+                }
+            } else {
+                if (button.classList.contains("text-bg-info")) {
+                    button.classList.replace("text-bg-info", "text-bg-secondary");
+                    left_selected = null;
+                }
+            }
+        }
+
+        function selectRight(button) {
+            if (left_selected) {
+                let left_word_id = left_selected.id.split("-")[1];
+                let right_word_id = button.id.split("-")[1];
+                if (left_word_id === right_word_id) {
+                    button.classList.replace("text-bg-secondary", "text-bg-success");
+                    left_selected.classList.replace("text-bg-info", "text-bg-success");
+                } else {
+                    button.classList.replace("text-bg-secondary", "text-bg-danger");
+                    left_selected.classList.replace("text-bg-info", "text-bg-danger");
+                    right_selected = button
+                }
                 left_selected = null;
             }
         }
-    }
 
-    function selectRight(button) {
-        if (left_selected) {
-            let left_word_id = left_selected.id.split("-")[1];
-            let right_word_id = button.id.split("-")[1];
-            if (left_word_id === right_word_id) {
-                button.classList.replace("btn-secondary", "btn-success");
-                left_selected.classList.replace("btn-info", "btn-success");
-            } else {
-                button.classList.replace("btn-secondary", "btn-danger");
-                left_selected.classList.replace("btn-info", "btn-danger");
-            }
-            left_selected = null;
+        let buttonsLeft = document.getElementsByClassName("btn-pair-source");
+        for (let index = 0; index < buttonsLeft.length; index++) {
+            buttonsLeft[index].addEventListener("click", (e) => {
+                selectLeft(buttonsLeft[index]);
+            });
         }
-    }
 
-    let buttonsLeft = document.getElementsByClassName("btn-pair-source");
-    for (let index = 0; index < buttonsLeft.length; index++) {
-        buttonsLeft[index].addEventListener("click", (e) => {
-            selectLeft(buttonsLeft[index]);
-        });
-    }
-
-    let buttonsRight = document.getElementsByClassName("btn-pair-translation");
-    for (let index = 0; index < buttonsRight.length; index++) {
-        buttonsRight[index].addEventListener("click", (e) => {
-            selectRight(buttonsRight[index]);
-        });
-    }
+        let buttonsRight = document.getElementsByClassName("btn-pair-translation");
+        for (let index = 0; index < buttonsRight.length; index++) {
+            buttonsRight[index].addEventListener("click", (e) => {
+                selectRight(buttonsRight[index]);
+            });
+        }
     </script>
 {% endblock %}
 
 {% block page_title %}{% trans 'Assign' %}{% endblock %}
 
 {% block content %}
-<div class="container">
-    {% for word in word_list %}
-    <div class="row">
-        <div class="col-6">
-
-            <div class="row">
-                <div class="col g-3">
-                    <button class="btn btn-secondary btn-pair btn-pair-source w-100"
-                            id="left-{{ word.id }}">
-                        {% if reverse %}
-                            {{ word.translation }}
-                        {% else %}
-                            {{ word.source }}
-                        {% endif %}
-                    </button>
+    <div class="container">
+        {% for word in word_list %}
+            <div class="row mt-3 mb-3">
+                <div class="col-6">
+                    <div class="card text-bg-secondary btn-pair btn-pair-source h-100"
+                         id="left-{{ word.id }}">
+                        <div class="card-body">
+                            {% if reverse %}
+                                {{ word.translation }}
+                            {% else %}
+                                {{ word.source }}
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-6">
-            <div class="row">
-                <div class="col g-3">
+                <div class="col-6">
                     {% get_item forloop.counter0 list=translate as right_word %}
-                    <button class="btn btn-secondary btn-pair btn-pair-translation w-100"
-                            id="right-{{ right_word.id }}">
-                        {% if reverse %}
-                            {{ right_word.source }}
-                        {% else %}
-                            {{ right_word.translation }}
-                        {% endif %}
-                    </button>
+                    <div class="card text-bg-secondary btn-pair btn-pair-translation h-100"
+                         id="right-{{ right_word.id }}">
+                        <div class="card-body">
+                            {% if reverse %}
+                                {{ right_word.source }}
+                            {% else %}
+                                {{ right_word.translation }}
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
             </div>
+        {% endfor %}
 
+        <div class="row mt-3 text-end">
+            <div class="col">
+                <button class="btn btn-secondary" type="button" onclick="location.reload();">
+                    {% bs_icon 'arrow-clockwise' %}
+                </button>
+            </div>
         </div>
     </div>
-    {% endfor %}
-
-    <div class="row mt-3 text-end">
-        <div class="col">
-            <button class="btn btn-secondary" type="button" onclick="location.reload();">
-                {% bs_icon 'arrow-clockwise' %}
-            </button>
-        </div>
-    </div>
-</div>
 {% endblock %}
