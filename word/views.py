@@ -35,9 +35,9 @@ class WordPairListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         amount = self.request.user.profile.pair_amount
         exclude = self.request.user.profile.exclude.values_list('id', flat=True)
-        words = Word.objects.exclude(id__in=exclude)[:amount]
+        words = Word.objects.exclude(id__in=exclude).random(amount)
         self.queryset = words
-        return words.random(amount=words.count())
+        return words
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
