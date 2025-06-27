@@ -1,3 +1,4 @@
+from django_random_queryset import RandomManager
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -24,6 +25,8 @@ class Word(models.Model):
 
     def __str__(self):
         return str(self.source)
+
+    objects = RandomManager()
 
     source = models.CharField(max_length=200, verbose_name=_('Word'))
     translation = models.CharField(max_length=200, verbose_name=_('Translation'))
