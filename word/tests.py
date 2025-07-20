@@ -75,6 +75,16 @@ class TestWordForms(WordBaseTest):
         self.assertFalse(form.is_valid())
         self.assertEqual(len(form.errors),2)
 
+    def test_word_form_double(self):
+        data = {
+            'source': self.word.source,
+            'translation': self.word.translation,
+        }
+        form = WordForm(data=data, user=self.user)
+        self.assertFalse(form.is_valid())
+        self.assertEqual(len(form.errors),1)
+        self.assertIn(_('This word already exists.'), form.errors['source'])
+
 
 class TestWordViews(WordBaseTest):
 

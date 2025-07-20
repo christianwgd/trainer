@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.views.decorators.http import require_GET
 from django.views.generic import ListView, CreateView, UpdateView
 
+
 from word.forms import WordForm
 from word.models import Word
 
