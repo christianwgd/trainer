@@ -17,6 +17,10 @@ input[type="checkbox"] {
     transition: all 0.8s ease;
 }
 
+.card-text {
+    padding: 0 15px;
+}
+
 .card-flip div {
     backface-visibility: hidden;
     transform-style: preserve-3d;
