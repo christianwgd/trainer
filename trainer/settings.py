@@ -160,6 +160,10 @@ MESSAGE_TAGS = {
     messages.ERROR: 'alert-danger',
 }
 
+# Bootstrap icons settings
+BS_ICONS_CACHE = Path(STATIC_URL) /'icon_cache'
+
+
 ##################
 # LOCAL SETTINGS #
 ##################

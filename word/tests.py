@@ -1,3 +1,4 @@
+import pytest
 from django.contrib import auth
 from django.test import TestCase
 from django.urls import reverse
@@ -6,6 +7,7 @@ from faker import Faker
 
 from word.forms import WordForm
 from word.models import Word, Language
+from word.templatetags.index_tags import get_item
 
 
 User = auth.get_user_model()
@@ -158,3 +160,14 @@ class TestWordViews(WordBaseTest):
         response = self.client.get(reverse('word:ignore', args=[self.word.pk]))
         self.assertEqual(response.status_code, 200)
         self.assertIn(self.word, self.user.profile.exclude.all())
+
+
+class TestIndexTags(TestCase):
+
+    def test_get_item(self):
+        my_list = ['apple', 'banana', 'cherry']
+        self.assertEqual(get_item(0, my_list), 'apple')
+        self.assertEqual(get_item(1, my_list), 'banana')
+        self.assertEqual(get_item(2, my_list), 'cherry')
+        with pytest.raises(IndexError):
+            get_item(3, my_list)  # Should raise IndexError for out of range index

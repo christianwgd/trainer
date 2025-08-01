@@ -3,6 +3,7 @@ from django.test import TestCase
 from django.urls import reverse
 from faker import Faker
 
+from trainer.templatetags.lang_flag_tags import lang_flag
 from word.models import Language
 
 User = auth.get_user_model()
@@ -32,3 +33,20 @@ class TestTrainerViews(TestCase):
         response = self.client.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'index.html')
+
+
+class TestLangFlagTags(TestCase):
+
+    def setUp(self):
+        self.fake = Faker('de_DE')
+        self.language = Language.objects.create(
+            name='Deutsch',
+            code='de'
+        )
+
+    def test_lang_flag_tag(self):
+        self.assertEqual(
+            lang_flag(self.language),
+            f'<img src="/static/flags/{self.language.code}.svg" '
+            f'alt="{self.language.name}" class="lang-flag">'
+        )
