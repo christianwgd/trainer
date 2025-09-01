@@ -1,3 +1,8 @@
+/* Fix for https://github.com/zostera/django-bootstrap5/issues/763 */
+.invalid-feedback {
+    display: block !important;
+}
+
 input[type="checkbox"] {
     display: none;
 }
