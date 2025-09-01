@@ -18,6 +18,7 @@ class WordForm(ModelForm):
         user = kwargs.pop('user')
         super().__init__(*args, **kwargs)
         self.fields['source'].label = user.profile.learn
+        self.fields['source'].widget.attrs.update({'autofocus': 'autofocus'})
         self.fields['translation'].label = user.profile.language
 
     def clean_source(self):
