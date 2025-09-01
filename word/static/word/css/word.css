@@ -72,5 +72,6 @@ p.small {
 }
 
 .card-body {
-    padding: 1rem 5px;
+    font-size: 0.9rem;
+    padding: .5rem 4px;
 }
