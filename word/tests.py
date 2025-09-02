@@ -1,11 +1,12 @@
 import pytest
 from django.contrib import auth
+from django.core import serializers
 from django.test import TestCase
 from django.urls import reverse
 from django.utils.translation import gettext as _
 from faker import Faker
 
-from word.forms import WordForm
+from word.forms import WordForm, WordQueryForm
 from word.models import Word, Language
 from word.templatetags.index_tags import get_item
 
@@ -18,12 +19,12 @@ class WordBaseTest(TestCase):
     def setUp(self):
         self.fake = Faker('de_DE')
         self.language_from = Language.objects.create(
-            name=self.fake.word(),
-            code=self.fake.language_code()
-        )
-        self.language_to = Language.objects.create(
             name=_('German'),
             code='de'
+        )
+        self.language_to = Language.objects.create(
+            name=_('Italian'),
+            code='it'
         )
         self.word = Word.objects.create(
             source=self.fake.word(),
@@ -54,6 +55,7 @@ class TestWordForms(WordBaseTest):
             username=self.fake.user_name(),
         )
         self.user.profile.language = self.language_from
+        self.user.profile.learn = self.language_to
         self.user.profile.save()
 
     def test_word_form_init(self):
@@ -86,6 +88,16 @@ class TestWordForms(WordBaseTest):
         self.assertFalse(form.is_valid())
         self.assertEqual(len(form.errors),1)
         self.assertIn(_('This word already exists.'), form.errors['source'])
+
+    def test_word_query_form_valid(self):
+        data = {
+            'query_string': self.fake.word(),
+            'language': self.user.profile.language.code,
+        }
+        form = WordQueryForm(data=data, user=self.user)
+        self.assertTrue(form.is_valid())
+        self.assertEqual(form.cleaned_data['query_string'], data['query_string'])
+        self.assertEqual(form.cleaned_data['language'], data['language'])
 
 
 class TestWordViews(WordBaseTest):
@@ -135,8 +147,8 @@ class TestWordViews(WordBaseTest):
         data = {
             'source': self.fake.word(),
             'translation': self.fake.word(),
-            'from_lang': self.user.profile.language,
-            'to_lang': self.user.profile.learn,
+            'from_lang': self.user.profile.language.code,
+            'to_lang': self.user.profile.learn.code,
         }
         response = self.client.post(reverse('word:create'), data)
         self.assertEqual(response.status_code, 302)
@@ -160,6 +172,60 @@ class TestWordViews(WordBaseTest):
         response = self.client.get(reverse('word:ignore', args=[self.word.pk]))
         self.assertEqual(response.status_code, 200)
         self.assertIn(self.word, self.user.profile.exclude.all())
+
+    def test_word_query_view_get(self):
+        response = self.client.get(reverse('word:query'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'word/word_query.html')
+
+    def test_word_query_view_get_with_session(self):
+        word_json = serializers.serialize("json", Word.objects.all())
+        sess = self.client.session
+        sess.update({'query_result': word_json})
+        sess.save()
+        response = self.client.get(reverse('word:query'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'word/word_query.html')
+        self.assertIn(self.word.source, response.content.decode())
+        self.assertIn(self.word.translation, response.content.decode())
+
+    def test_word_query_view_post(self):
+        test_word = Word.objects.create(
+            source=self.fake.word(),
+            translation=self.fake.word(),
+            from_lang=self.language_from,
+            to_lang=self.language_to,
+        )
+        word_json = serializers.serialize("json", Word.objects.all())
+        sess = self.client.session
+        sess.update({'query_result': word_json})
+        sess.save()
+        data = {
+            'query_string': test_word.translation,
+            'language': test_word.from_lang.code,
+        }
+        response = self.client.post(reverse('word:query'), data)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, reverse('word:query'))
+
+    def test_word_query_view_post_reverse(self):
+        test_word = Word.objects.create(
+            source=self.fake.word(),
+            translation=self.fake.word(),
+            from_lang=self.language_from,
+            to_lang=self.language_to,
+        )
+        word_json = serializers.serialize("json", Word.objects.all())
+        sess = self.client.session
+        sess.update({'query_result': word_json})
+        sess.save()
+        data = {
+            'query_string': test_word.translation,
+            'language': test_word.to_lang.code,
+        }
+        response = self.client.post(reverse('word:query'), data)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, reverse('word:query'))
 
 
 class TestIndexTags(TestCase):

@@ -37,12 +37,12 @@ class WordQueryForm(forms.Form):
         label=_('Query String'),
         max_length=100,
         widget=forms.TextInput(attrs={'autofocus': 'autofocus'}),
-        required=True,
+        # required=True,
     )
     language = forms.ChoiceField(
         label='Language',
         choices=[],
-        required=True,
+        # required=True,
     )
 
     def __init__(self, *args, **kwargs):
