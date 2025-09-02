@@ -5,7 +5,7 @@
 {{ block.super }}
 {% endblock %}
 
-{% block page_title %}{% trans 'Vocabulary Trainer' %}{% endblock %}
+{% block page_title %}{% endblock %}
 
 {% block content %}
 <div class="row mt-3">
@@ -46,6 +46,13 @@
                     {% lang_flag user.profile.learn %}
                     {% bs_icon 'arrow-right' %}
                     {% lang_flag user.profile.language %}
+                </a>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-12">
+                <a href="{% url 'word:query' %}" class="btn btn-lg btn-secondary" type="button">
+                    {% bs_icon 'search' %}
                 </a>
             </div>
         </div>

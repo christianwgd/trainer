@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-20 11:51+0200\n"
+"POT-Creation-Date: 2025-09-02 10:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,9 +22,13 @@ msgstr ""
 msgid "Word"
 msgstr "Wort"
 
-#: forms.py:27 tests.py:86
+#: forms.py:29 tests.py:88
 msgid "This word already exists."
 msgstr "Dieses Wort ist bereits vorhanden."
+
+#: forms.py:37
+msgid "Query String"
+msgstr ""
 
 #: models.py:9 models.py:15
 msgid "Language"
@@ -46,7 +50,7 @@ msgstr "Worte"
 msgid "Translation"
 msgstr "Übersetzung"
 
-#: templates/word/word_form.html:13
+#: templates/word/word_form.html:13 templates/word/word_query.html:13
 msgid "New word"
 msgstr "Neues Wort"
 
@@ -54,7 +58,7 @@ msgstr "Neues Wort"
 msgid "Ok"
 msgstr ""
 
-#: templates/word/word_form.html:33
+#: templates/word/word_form.html:33 templates/word/word_query.html:49
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -63,8 +67,8 @@ msgid "Translate"
 msgstr "Übersetzen"
 
 #: templates/word/word_list.html:25
-msgid "Kown it, don't ask again!"
-msgstr "Weiss ich, nicht mehr fragen!"
+msgid "I know that, don't ask again!"
+msgstr "Weiß ich, nicht mehr fragen!"
 
 #: templates/word/word_list.html:31
 msgid "Update word"
@@ -74,6 +78,14 @@ msgstr "Wort ändern"
 msgid "Assign"
 msgstr "Zuordnen"
 
-#: tests.py:23
+#: templates/word/word_query.html:37
+msgid "No results"
+msgstr ""
+
+#: templates/word/word_query.html:46
+msgid "Search"
+msgstr ""
+
+#: tests.py:25
 msgid "German"
 msgstr "Deutsch"

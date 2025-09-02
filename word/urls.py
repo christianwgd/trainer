@@ -12,4 +12,5 @@ urlpatterns = [
     path('create/', views.WordCreateView.as_view(), name='create'),
     path('update/<int:pk>/', views.WordUpdateView.as_view(), name='update'),
     path('ignore/<int:pk>/', views.ignore_word, name='ignore'),
+    path('query/', views.WordQueryView.as_view(), name='query'),
 ]

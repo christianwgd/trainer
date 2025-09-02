@@ -1,4 +1,5 @@
 from django.core.exceptions import ValidationError
+from django import forms
 from django.forms.models import ModelForm
 from django.utils.translation import gettext_lazy as _
 
@@ -28,3 +29,26 @@ class WordForm(ModelForm):
                 _('This word already exists.'),
             )
         return source
+
+
+class WordQueryForm(forms.Form):
+
+    query_string = forms.CharField(
+        label=_('Query String'),
+        max_length=100,
+        widget=forms.TextInput(attrs={'autofocus': 'autofocus'}),
+        required=True,
+    )
+    language = forms.ChoiceField(
+        label='Language',
+        choices=[],
+        required=True,
+    )
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
+        super().__init__(*args, **kwargs)
+        self.fields['language'].choices = [
+            (user.profile.language.code, user.profile.language.name),
+            (user.profile.learn.code, user.profile.learn.name),
+        ]

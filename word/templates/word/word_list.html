@@ -22,7 +22,7 @@
             <label class="card-container" for='card-{{ word.id }}'>
                 <button class="btn btn-sm btn-ignore" id='ignore-{{ word.id }}'
                         data-bs-toggle="tooltip" data-bs-placement="bottom" data-id="{{ word.id }}"
-                        data-bs-title='{% trans "Kown it, don't ask again!" %}'>
+                        data-bs-title='{% trans "I know that, don't ask again!" %}'>
                     {% bs_icon 'x-square' %}
                 </button>
                 <a href="{% url 'word:update' word.id %}" target="_blank"

@@ -1,13 +1,13 @@
 from random import shuffle
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core import serializers
 from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.views.decorators.http import require_GET
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, FormView
 
-
-from word.forms import WordForm
+from word.forms import WordForm, WordQueryForm
 from word.models import Word
 
 
@@ -66,6 +66,39 @@ class WordCreateView(LoginRequiredMixin, CreateView):
         word = form.save(commit=False)
         word.from_lang = self.request.user.profile.learn
         word.to_lang = self.request.user.profile.language
+        return super().form_valid(form)
+
+
+class WordQueryView(LoginRequiredMixin, FormView):
+    form_class = WordQueryForm
+    template_name = 'word/word_query.html'
+    success_url = reverse_lazy('word:query')
+
+    def get_form_kwargs(self):
+        form_kwargs = super().get_form_kwargs()
+        form_kwargs['user'] = self.request.user
+        return form_kwargs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        results = self.request.session.get('query_result', None)
+        if not results:
+            return context
+        words = []
+        for obj in serializers.deserialize("json", results):
+            words.append(obj.object)
+        context['results'] = words
+        del self.request.session['query_result']
+        return context
+
+    def form_valid(self, form):
+        query_string = form.cleaned_data['query_string']
+        language = form.cleaned_data['language']
+        if language == self.request.user.profile.learn.code:
+            results = Word.objects.filter(source__icontains=query_string)
+        else:
+            results = Word.objects.filter(translation__icontains=query_string)
+        self.request.session['query_result'] = serializers.serialize("json", results)
         return super().form_valid(form)
 
 
