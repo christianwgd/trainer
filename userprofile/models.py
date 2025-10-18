@@ -30,7 +30,7 @@ class UserProfile(models.Model):
     )
     learn = models.ForeignKey(
         Language, on_delete=models.PROTECT, related_name='learners',
-        verbose_name=_('Learning Language'), null=True, blank=True
+        verbose_name=_('Learning Language'), null=True
     )
     exclude = models.ManyToManyField(
         Word, related_name='excluded_by_user',

@@ -27,12 +27,32 @@ class TestTrainerViews(TestCase):
         self.user.profile.language = self.language_from
         self.user.profile.learn = self.language_to
         self.user.profile.save()
-        self.client.force_login(self.user)
 
     def test_index_view(self):
+        self.client.force_login(self.user)
         response = self.client.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'index.html')
+
+    def test_switch_no_user(self):
+        response = self.client.get(reverse('switch'))
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, reverse('account_login'))
+
+    def test_switch_user_has_learn_language(self):
+        self.client.force_login(self.user)
+        response = self.client.get(reverse('switch'))
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, reverse('home'))
+
+    def test_switch_user_has_no_learn_language(self):
+        user = User.objects.create_user(
+            username=self.fake.user_name(),
+        )
+        self.client.force_login(user)
+        response = self.client.get(reverse('switch'))
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, reverse('userprofile:update'))
 
 
 class TestLangFlagTags(TestCase):

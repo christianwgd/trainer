@@ -37,6 +37,7 @@ urlpatterns = [
     path('userprofile/', include('userprofile.urls')),
     path('word/', include('word.urls')),
     path('', views.index, name='home'),
+    path('switch/', views.switch, name='switch'),
     path('favicon.ico', RedirectView.as_view(url='/static/favicon/favicon.ico')),
 ]
 if settings.DEBUG:  # pragma: no cover
