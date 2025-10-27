@@ -8,6 +8,7 @@
 
 {% block bootstrap5_extra_script %}
     {{ block.super }}
+    <script src="{% static 'word/js/ignore.js' %}"></script>
     <script>
         let left_selected = null;
         let right_selected = null;
@@ -71,6 +72,17 @@
                 <div class="col-6">
                     <div class="card text-bg-secondary btn-pair btn-pair-source h-100"
                          id="left-{{ word.id }}">
+                        <button class="btn btn-sm btn-ignore btn-left btn-action-pair" id='ignore-{{ word.id }}'
+                            data-bs-toggle="tooltip" data-bs-placement="bottom" data-id="{{ word.id }}"
+                            data-bs-title='{% trans "I know that, don't ask again!" %}'>
+                            {% bs_icon 'x-square' %}
+                        </button>
+                        <a href="{% url 'word:update' word.id %}" target="_blank"
+                           class="btn btn-sm btn-edit btn-right btn-action-pair" id='edit-{{ word.id }}'
+                           data-bs-toggle="tooltip" data-bs-placement="bottom"
+                           data-bs-title="{% trans 'Update word' %}">
+                            {% bs_icon 'pencil-square' %}
+                        </a>
                         <div class="card-body">
                             {% if reverse %}
                                 {{ word.translation }}

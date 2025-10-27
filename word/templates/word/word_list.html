@@ -20,13 +20,13 @@
         <div class="col" id="col-{{ word.id }}">
             <input type="checkbox" id="card-{{ word.id }}"/>
             <label class="card-container" for='card-{{ word.id }}'>
-                <button class="btn btn-sm btn-ignore" id='ignore-{{ word.id }}'
+                <button class="btn btn-sm btn-ignore btn-left" id='ignore-{{ word.id }}'
                         data-bs-toggle="tooltip" data-bs-placement="bottom" data-id="{{ word.id }}"
                         data-bs-title='{% trans "I know that, don't ask again!" %}'>
                     {% bs_icon 'x-square' %}
                 </button>
                 <a href="{% url 'word:update' word.id %}" target="_blank"
-                   class="btn btn-sm btn-edit" id='edit-{{ word.id }}'
+                   class="btn btn-sm btn-edit btn-right" id='edit-{{ word.id }}'
                    data-bs-toggle="tooltip" data-bs-placement="bottom"
                    data-bs-title="{% trans 'Update word' %}">
                     {% bs_icon 'pencil-square' %}

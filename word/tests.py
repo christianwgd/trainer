@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.utils.translation import gettext as _
 from faker import Faker
 
-from word.forms import WordForm, WordQueryForm
+from word.forms import WordCreateForm, WordQueryForm
 from word.models import Word, Language
 from word.templatetags.index_tags import get_item
 
@@ -59,7 +59,7 @@ class TestWordForms(WordBaseTest):
         self.user.profile.save()
 
     def test_word_form_init(self):
-        form = WordForm(user=self.user)
+        form = WordCreateForm(user=self.user)
         self.assertEqual(form.fields['source'].label, self.user.profile.learn)
         self.assertEqual(form.fields['translation'].label, self.user.profile.language)
 
@@ -68,14 +68,14 @@ class TestWordForms(WordBaseTest):
             'source': self.fake.word(),
             'translation': self.fake.word(),
         }
-        form = WordForm(data=data, user=self.user)
+        form = WordCreateForm(data=data, user=self.user)
         self.assertTrue(form.is_valid())
         self.assertEqual(form.cleaned_data['source'], data['source'])
         self.assertEqual(form.cleaned_data['translation'], data['translation'])
 
     def test_word_form_invalid(self):
         data = {}
-        form = WordForm(data=data, user=self.user)
+        form = WordCreateForm(data=data, user=self.user)
         self.assertFalse(form.is_valid())
         self.assertEqual(len(form.errors),2)
 
@@ -84,7 +84,7 @@ class TestWordForms(WordBaseTest):
             'source': self.word.source,
             'translation': self.word.translation,
         }
-        form = WordForm(data=data, user=self.user)
+        form = WordCreateForm(data=data, user=self.user)
         self.assertFalse(form.is_valid())
         self.assertEqual(len(form.errors),1)
         self.assertIn(_('This word already exists.'), form.errors['source'])

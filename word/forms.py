@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 from word.models import Word
 
 
-class WordForm(ModelForm):
+class WordCreateForm(ModelForm):
 
     class Meta:
         model = Word
@@ -29,6 +29,15 @@ class WordForm(ModelForm):
                 _('This word already exists.'),
             )
         return source
+
+
+class WordUpdateForm(ModelForm):
+
+    class Meta:
+        model = Word
+        fields = [
+            'source', 'translation'
+        ]
 
 
 class WordQueryForm(forms.Form):
