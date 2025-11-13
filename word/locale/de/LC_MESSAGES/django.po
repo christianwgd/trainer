@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-19 12:55+0200\n"
+"POT-Creation-Date: 2025-11-13 19:04+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,7 +50,7 @@ msgstr "Worte"
 msgid "Translation"
 msgstr "Übersetzung"
 
-#: templates/word/word_form.html:15 templates/word/word_query.html:13
+#: templates/word/word_form.html:13
 msgid "New word"
 msgstr "Neues Wort"
 
@@ -78,6 +78,10 @@ msgstr "Weiß ich, nicht mehr fragen!"
 #: templates/word/word_pairs.html:65
 msgid "Assign"
 msgstr "Zuordnen"
+
+#: templates/word/word_query.html:13
+msgid "Query word"
+msgstr "Wort suchen"
 
 #: templates/word/word_query.html:37
 msgid "No results"
