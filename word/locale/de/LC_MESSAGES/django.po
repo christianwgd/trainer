@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-02 10:21+0200\n"
+"POT-Creation-Date: 2025-11-13 19:04+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,13 +22,13 @@ msgstr ""
 msgid "Word"
 msgstr "Wort"
 
-#: forms.py:29 tests.py:88
+#: forms.py:29 tests.py:90
 msgid "This word already exists."
 msgstr "Dieses Wort ist bereits vorhanden."
 
 #: forms.py:37
 msgid "Query String"
-msgstr ""
+msgstr "Suchbegriff"
 
 #: models.py:9 models.py:15
 msgid "Language"
@@ -50,7 +50,7 @@ msgstr "Worte"
 msgid "Translation"
 msgstr "Übersetzung"
 
-#: templates/word/word_form.html:13 templates/word/word_query.html:13
+#: templates/word/word_form.html:13
 msgid "New word"
 msgstr "Neues Wort"
 
@@ -78,14 +78,22 @@ msgstr "Wort ändern"
 msgid "Assign"
 msgstr "Zuordnen"
 
+#: templates/word/word_query.html:13
+msgid "Query word"
+msgstr "Wort suchen"
+
 #: templates/word/word_query.html:37
 msgid "No results"
-msgstr ""
+msgstr "Keine Ergebnisse"
 
 #: templates/word/word_query.html:46
 msgid "Search"
 msgstr ""
 
-#: tests.py:25
+#: tests.py:22
 msgid "German"
 msgstr "Deutsch"
+
+#: tests.py:26
+msgid "Italian"
+msgstr "Italienisch"
