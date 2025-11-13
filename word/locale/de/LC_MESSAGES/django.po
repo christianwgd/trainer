@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-13 19:04+0100\n"
+"POT-Creation-Date: 2025-11-13 19:15+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,7 +26,7 @@ msgstr "Wort"
 msgid "This word already exists."
 msgstr "Dieses Wort ist bereits vorhanden."
 
-#: forms.py:37
+#: forms.py:46
 msgid "Query String"
 msgstr "Suchbegriff"
 
@@ -50,12 +50,12 @@ msgstr "Worte"
 msgid "Translation"
 msgstr "Übersetzung"
 
-#: templates/word/word_form.html:13
+#: templates/word/word_form.html:15
 msgid "New word"
 msgstr "Neues Wort"
 
 #: templates/word/word_form.html:17 templates/word/word_list.html:31
-#: templates/word/word_pairs.html:78
+#: templates/word/word_pairs.html:83
 msgid "Update word"
 msgstr "Wort ändern"
 
@@ -71,11 +71,11 @@ msgstr "Abbrechen"
 msgid "Translate"
 msgstr "Übersetzen"
 
-#: templates/word/word_list.html:25
+#: templates/word/word_list.html:25 templates/word/word_pairs.html:77
 msgid "I know that, don't ask again!"
 msgstr "Weiß ich, nicht mehr fragen!"
 
-#: templates/word/word_pairs.html:65
+#: templates/word/word_pairs.html:66
 msgid "Assign"
 msgstr "Zuordnen"
 
