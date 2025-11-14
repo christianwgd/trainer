@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.views.decorators.http import require_GET
 from django.views.generic import ListView, CreateView, UpdateView, FormView
 
-from word.forms import WordForm, WordQueryForm
+from word.forms import WordCreateForm, WordQueryForm, WordUpdateForm
 from word.models import Word
 
 
@@ -54,7 +54,7 @@ class WordPairListView(LoginRequiredMixin, ListView):
 
 class WordCreateView(LoginRequiredMixin, CreateView):
     model = Word
-    form_class = WordForm
+    form_class = WordCreateForm
     success_url = reverse_lazy('word:create')
 
     def get_form_kwargs(self):
@@ -104,13 +104,9 @@ class WordQueryView(LoginRequiredMixin, FormView):
 
 class WordUpdateView(LoginRequiredMixin, UpdateView):
     model = Word
-    form_class = WordForm
+    form_class = WordUpdateForm
     success_url = reverse_lazy('home')
 
-    def get_form_kwargs(self):
-        form_kwargs = super().get_form_kwargs()
-        form_kwargs['user'] = self.request.user
-        return form_kwargs
 
 @require_GET
 def ignore_word(request, pk):

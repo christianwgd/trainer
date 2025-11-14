@@ -58,17 +58,21 @@ p.small {
     margin-bottom: 4px;
 }
 
-.btn-edit {
-    position: absolute;
-    top: 0;
-    right: 0;
+.btn-edit, .btn-ignore {
     z-index: 1;
 }
-.btn-ignore {
+.btn-left {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 1;
+}
+.btn-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.btn-action-pair {
+    color: #cccccc;
 }
 
 .card-body {
