@@ -21,10 +21,7 @@ class WordListView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if self.request.path.endswith('reverse/'):
-            context['reverse'] = True
-        else:
-            context['reverse'] = False
+        context['reverse'] = self.request.path.endswith('reverse/')
         return context
 
 
@@ -45,10 +42,7 @@ class WordPairListView(LoginRequiredMixin, ListView):
         qs_copy = list(self.queryset)
         shuffle(qs_copy)
         context['translate'] = qs_copy
-        if self.request.path.endswith('reverse/'):
-            context['reverse'] = True
-        else:
-            context['reverse'] = False
+        context['reverse'] = self.request.path.endswith('reverse/')
         return context
 
 
@@ -82,7 +76,7 @@ class WordQueryView(LoginRequiredMixin, FormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         results = self.request.session.get('query_result', None)
-        if not results:
+        if results is None:
             return context
         context['results'] = [obj.object for obj in serializers.deserialize("json", results)]
         del self.request.session['query_result']
