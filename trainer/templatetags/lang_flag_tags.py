@@ -8,5 +8,5 @@ register = template.Library()
 def lang_flag(lang):
     return mark_safe(
         f'<img src="/static/flags/{lang.code}.svg" '
-        f'alt="{lang.name}" class="lang-flag">'
+        f'alt="{lang.name}" class="lang-flag">',
     )

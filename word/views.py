@@ -5,7 +5,7 @@ from django.core import serializers
 from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.views.decorators.http import require_GET
-from django.views.generic import ListView, CreateView, UpdateView, FormView
+from django.views.generic import CreateView, FormView, ListView, UpdateView
 
 from word.forms import WordCreateForm, WordQueryForm, WordUpdateForm
 from word.models import Word
@@ -84,10 +84,7 @@ class WordQueryView(LoginRequiredMixin, FormView):
         results = self.request.session.get('query_result', None)
         if not results:
             return context
-        words = []
-        for obj in serializers.deserialize("json", results):
-            words.append(obj.object)
-        context['results'] = words
+        context['results'] = [obj.object for obj in serializers.deserialize("json", results)]
         del self.request.session['query_result']
         return context
 

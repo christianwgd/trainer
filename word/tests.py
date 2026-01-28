@@ -7,9 +7,8 @@ from django.utils.translation import gettext as _
 from faker import Faker
 
 from word.forms import WordCreateForm, WordQueryForm
-from word.models import Word, Language
+from word.models import Language, Word
 from word.templatetags.index_tags import get_item
-
 
 User = auth.get_user_model()
 
@@ -20,11 +19,11 @@ class WordBaseTest(TestCase):
         self.fake = Faker('de_DE')
         self.language_from = Language.objects.create(
             name=_('German'),
-            code='de'
+            code='de',
         )
         self.language_to = Language.objects.create(
             name=_('Italian'),
-            code='it'
+            code='it',
         )
         self.word = Word.objects.create(
             source=self.fake.word(),
@@ -130,7 +129,7 @@ class TestWordViews(WordBaseTest):
         self.assertTemplateUsed(response, 'word/word_pairs.html')
         self.assertEqual(
             set(response.context['word_list']),
-            set(response.context['translate'])
+            set(response.context['translate']),
         )
 
     def test_word_pair_list_view_reverse(self):

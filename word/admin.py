@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from word.models import Word, Language
+from word.models import Language, Word
 
 
 @admin.register(Word)

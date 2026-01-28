@@ -1,8 +1,7 @@
-from django.core.exceptions import ValidationError
 from django import forms
+from django.core.exceptions import ValidationError
 from django.forms.models import ModelForm
 from django.utils.translation import gettext_lazy as _
-
 
 from word.models import Word
 
@@ -12,7 +11,7 @@ class WordCreateForm(ModelForm):
     class Meta:
         model = Word
         fields = [
-            'source', 'translation'
+            'source', 'translation',
         ]
 
     def __init__(self, *args, **kwargs):
@@ -36,7 +35,7 @@ class WordUpdateForm(ModelForm):
     class Meta:
         model = Word
         fields = [
-            'source', 'translation'
+            'source', 'translation',
         ]
 
 
@@ -46,12 +45,10 @@ class WordQueryForm(forms.Form):
         label=_('Query String'),
         max_length=100,
         widget=forms.TextInput(attrs={'autofocus': 'autofocus'}),
-        # required=True,
     )
     language = forms.ChoiceField(
         label='Language',
         choices=[],
-        # required=True,
     )
 
     def __init__(self, *args, **kwargs):

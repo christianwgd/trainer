@@ -6,7 +6,6 @@ from userprofile.forms import UserProfileForm
 from userprofile.models import UserProfile
 
 
-
 class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = UserProfile
     form_class = UserProfileForm

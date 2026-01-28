@@ -15,11 +15,11 @@ class TestTrainerViews(TestCase):
         self.fake = Faker('de_DE')
         self.language_from = Language.objects.create(
             name=self.fake.word(),
-            code=self.fake.language_code()
+            code=self.fake.language_code(),
         )
         self.language_to = Language.objects.create(
             name='Deutsch',
-            code='de'
+            code='de',
         )
         self.user = User.objects.create_user(
             username=self.fake.user_name(),
@@ -61,12 +61,12 @@ class TestLangFlagTags(TestCase):
         self.fake = Faker('de_DE')
         self.language = Language.objects.create(
             name='Deutsch',
-            code='de'
+            code='de',
         )
 
     def test_lang_flag_tag(self):
         self.assertEqual(
             lang_flag(self.language),
             f'<img src="/static/flags/{self.language.code}.svg" '
-            f'alt="{self.language.name}" class="lang-flag">'
+            f'alt="{self.language.name}" class="lang-flag">',
         )

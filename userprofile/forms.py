@@ -18,7 +18,7 @@ class UserProfileForm(ModelForm):
         fields = [
             'list_amount', 'pair_amount',
             'exclude',
-            'language', 'learn'
+            'language', 'learn',
         ]
         widgets = {
             'exclude': BootstrapSelect2MultipleWidget,
