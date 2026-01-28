@@ -93,7 +93,7 @@
                     </div>
                 </div>
                 <div class="col-6">
-                    {% get_item forloop.counter0 list=translate as right_word %}
+                    {% get_item forloop.counter0 word_list=translate as right_word %}
                     <div class="card text-bg-secondary btn-pair btn-pair-translation h-100"
                          id="right-{{ right_word.id }}">
                         <div class="card-body">
