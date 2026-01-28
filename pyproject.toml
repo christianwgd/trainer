@@ -4,16 +4,19 @@ line-length = 120
 [tool.ruff.lint]
 # Enable flake8-bugbear (`B`) rules.
 select = [
+    "A",
+    "B",
     "E",
     "F",
-    "B",
-    "PL",
     "S",
     "W",
     "N",
     "G",
     "C4",
     "EM",
+    "PL", "UP",
+    "YTT",
+    "INT",
     "ISC",
     "ICN",
     "PIE",
@@ -23,6 +26,10 @@ select = [
     "RET",
     "INT",
     "RUF",
+    "FBT",
+    "SIM",
+    "TID",
+    "PTH",
 ]
 ignore = [
     "B905",    # `zip()` without an explicit `strict=` parameter
@@ -55,4 +62,4 @@ omit = [
 ]
 
 [tool.django-stubs]
-django_settings_module = "myproject.settings"
+django_settings_module = "trainer.settings"
