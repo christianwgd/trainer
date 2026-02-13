@@ -179,7 +179,6 @@ BS_ICONS_CACHE = Path(STATIC_URL) /'icon_cache'
 
 local_settings_file = Path(PROJECT_APP_PATH) / "localsettings.py"
 if local_settings_file.exists():
-    import sys
     import importlib
     module_name = f"{PROJECT_APP}.localsettings"
     module = importlib.import_module(module_name)
