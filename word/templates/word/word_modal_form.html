@@ -1,0 +1,41 @@
+{% load django_bootstrap5 i18n static bootstrap_icons %}
+
+<div class="modal fade" id="word-modal-form" aria-labelledby="word-modal-form" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">{% trans 'Update word' %}</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <div class="mb-3 form-floating">
+                            <input type="text" name="source" maxlength="200" class="form-control"
+                                   placeholder="{% trans 'Word' %}" required="" id="id_source">
+                            <label class="form-label" for="id_source">
+                                {% trans 'Word' %}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="mb-3 form-floating">
+                            <input type="text" name="translation" maxlength="200" class="form-control"
+                                   placeholder="{% trans 'Translation' %}" required="" id="id_translation">
+                            <label class="form-label" for="id_translation">
+                                {% trans 'Translation' %}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">{% trans 'Ok' %}</button>
+            </div>
+
+        </div>
+    </div>
+</div>
