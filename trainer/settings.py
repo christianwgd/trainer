@@ -101,7 +101,7 @@ DATABASES = {
 }
 
 ADMINS = [
-    ['cwiegand@wgdnet.de'],
+    'cwiegand@wgdnet.de',
 ]
 
 MANAGERS = ADMINS

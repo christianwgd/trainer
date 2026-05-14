@@ -13,4 +13,6 @@ urlpatterns = [
     path('update/<int:pk>/', views.WordUpdateView.as_view(), name='update'),
     path('ignore/<int:pk>/', views.ignore_word, name='ignore'),
     path('query/', views.WordQueryView.as_view(), name='query'),
+    path('get_word/<int:pk>/', views.get_word, name='get_word'),
+    path('set_word/<int:pk>/', views.set_word, name='set_word'),
 ]

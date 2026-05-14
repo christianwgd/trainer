@@ -8,12 +8,16 @@
 
 {% block bootstrap5_extra_script %}
     {{ block.super }}
+    <script>let csrf_token = "{{ csrf_token }}";</script>
     <script src="{% static 'word/js/ignore.js' %}"></script>
+    <script src="{% static 'word/js/update.js' %}"></script>
 {% endblock %}
 
 {% block page_title %}{% trans 'Translate' %}{% endblock %}
 
 {% block content %}
+{% include 'word/word_modal_form.html' %}
+
 <div class="container">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-3">
     {% for word in word_list %}
@@ -25,21 +29,20 @@
                         data-bs-title='{% trans "I know that, don't ask again!" %}'>
                     {% bs_icon 'x-square' %}
                 </button>
-                <a href="{% url 'word:update' word.id %}" target="_blank"
-                   class="btn btn-sm btn-edit btn-right" id='edit-{{ word.id }}'
-                   data-bs-toggle="tooltip" data-bs-placement="bottom"
-                   data-bs-title="{% trans 'Update word' %}">
-                    {% bs_icon 'pencil-square' %}
-                </a>
+                <button class="btn btn-sm btn-edit btn-right" id='edit-{{ word.id }}'
+                        data-bs-toggle="tooltip" data-bs-placement="bottom" data-id="{{ word.id }}"
+                        data-bs-title='{% trans 'Update word' %}'>
+                   {% bs_icon 'pencil-square' %}
+                </button>
                 <div class="card-flip">
                     <!-- Card Front -->
                     <div class="card front">
                         <div class="card-text mt-4">
                             <p class="large mt-2">
                                 {% if reverse %}
-                                    {{ word.translation }}
+                                    <span class="translation-{{ word.id }}">{{ word.translation }}</span>
                                 {% else %}
-                                    {{ word }}
+                                    <span class="source-{{ word.id }}">{{ word }}</span>
                                 {% endif %}
                             </p>
                         </div>
@@ -50,11 +53,19 @@
                     <div class="card back">
                         <div class="card-text mt-2">
                             {% if reverse %}
-                                <p class="small">{{ word.translation }}</p>
-                                <p class="large">{{ word }}</p>
+                                <p class="small">
+                                    <span class="translation-{{ word.id }}">{{ word.translation }}</span>
+                                </p>
+                                <p class="large">
+                                    <span class="source-{{ word.id }}">{{ word }}</span>
+                                </p>
                             {% else %}
-                                <p class="small">{{ word }}</p>
-                                <p class="large">{{ word.translation }}</p>
+                                <p class="small">
+                                    <span class="source-{{ word.id }}">{{ word }}</span>
+                                </p>
+                                <p class="large">
+                                    <span class="translation-{{ word.id }}">{{ word.translation }}</span>
+                                </p>
                             {% endif %}
                         </div>
                     </div>

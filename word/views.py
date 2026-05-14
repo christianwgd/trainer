@@ -1,10 +1,11 @@
+import json
 from random import shuffle
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core import serializers
 from django.http import JsonResponse
 from django.urls import reverse_lazy
-from django.views.decorators.http import require_GET
+from django.views.decorators.http import require_GET, require_POST
 from django.views.generic import CreateView, FormView, ListView, UpdateView
 
 from word.forms import WordCreateForm, WordQueryForm, WordUpdateForm
@@ -107,3 +108,19 @@ def ignore_word(request, pk):
     word = Word.objects.get(pk=pk)
     word.excluded_by_user.add(request.user.profile)
     return JsonResponse({'status': 'Word ignored!'})
+
+
+@require_GET
+def get_word(request, pk):
+    word = Word.objects.get(pk=pk)
+    return JsonResponse({'word': word.source, 'translation': word.translation})
+
+
+@require_POST
+def set_word(request, pk):
+    word = Word.objects.get(pk=pk)
+    data = json.loads(request.body)
+    word.source = data['word']
+    word.translation = data['translation']
+    word.save()
+    return JsonResponse({'status': 'Word set!'})

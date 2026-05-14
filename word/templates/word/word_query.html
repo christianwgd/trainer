@@ -8,11 +8,15 @@
 
 {% block bootstrap5_extra_script %}
     {{ block.super }}
+    <script>let csrf_token = "{{ csrf_token }}"</script>;
+    <script src="{% static 'word/js/update.js' %}"></script>
 {% endblock %}
 
 {% block page_title %}{% trans 'Query word' %}{% endblock %}
 
 {% block content %}
+{% include 'word/word_modal_form.html' %}
+
 <form role="form" method="post" novalidate>
     {% csrf_token %}
     <div class="row">
@@ -30,8 +34,15 @@
                 <tbody>
                 {% for word in results %}
                     <tr>
-                        <td>{{ word.source }}</td>
-                        <td>{{ word.translation }}</td>
+                        <td><span class="source-{{ word.id }}">{{ word.source }}</span></td>
+                        <td><span class="translation-{{ word.id }}">{{ word.translation }}</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-edit" id='edit-{{ word.id }}' type="button"
+                                    data-bs-toggle="tooltip" data-bs-placement="bottom" data-id="{{ word.id }}"
+                                    data-bs-title='{% trans 'Update word' %}'>
+                               {% bs_icon 'pencil-square' %}
+                            </button>
+                        </td>
                     </tr>
                 {% empty %}
                     <tr><td>{% trans 'No results' %}</td></tr>

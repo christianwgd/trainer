@@ -1,3 +1,5 @@
+import json
+
 import pytest
 from django.contrib import auth
 from django.core import serializers
@@ -225,6 +227,35 @@ class TestWordViews(WordBaseTest):
         response = self.client.post(reverse('word:query'), data)
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.url, reverse('word:query'))
+
+    def test_word_get_word(self):
+        response = self.client.get(reverse('word:get_word', args=[self.word.pk]))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['Content-Type'], 'application/json')
+        self.assertEqual(
+            response.json(),
+            {"word": self.word.source, "translation": self.word.translation},
+        )
+
+    def test_word_set_word(self):
+        data = {
+            'word': self.fake.word(),
+            'translation': self.fake.word(),
+        }
+        response = self.client.post(
+            reverse('word:set_word', args=[self.word.pk]),
+            json.dumps(data),
+            content_type='application/json',
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['Content-Type'], 'application/json')
+        self.assertEqual(
+            response.json(),
+            {'status': 'Word set!'},
+        )
+        self.word.refresh_from_db()
+        self.assertEqual(self.word.source, data['word'])
+        self.assertEqual(self.word.translation, data['translation'])
 
 
 class TestIndexTags(TestCase):
