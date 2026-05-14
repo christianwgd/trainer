@@ -47,7 +47,7 @@ class WordQueryForm(forms.Form):
         widget=forms.TextInput(attrs={'autofocus': 'autofocus'}),
     )
     language = forms.ChoiceField(
-        label='Language',
+        label=_('Language'),
         choices=[],
     )
 
