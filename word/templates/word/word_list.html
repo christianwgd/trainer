@@ -9,7 +9,7 @@
 {% block bootstrap5_extra_script %}
     {{ block.super }}
     <script>
-    csrf_token = "{{ csrf_token }}";
+    let csrf_token = "{{ csrf_token }}";
     </script>
     <script src="{% static 'word/js/ignore.js' %}"></script>
     <script src="{% static 'word/js/update.js' %}"></script>

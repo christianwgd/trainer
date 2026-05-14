@@ -122,6 +122,5 @@ def set_word(request, pk):
     data = json.loads(request.body)
     word.source = data['word']
     word.translation = data['translation']
-    print(word.source, word.translation)
     word.save()
     return JsonResponse({'status': 'Word set!'})
