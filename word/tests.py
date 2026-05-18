@@ -228,6 +228,25 @@ class TestWordViews(WordBaseTest):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.url, reverse('word:query'))
 
+    def test_word_query_view_post_no_language(self):
+        test_word = Word.objects.create(
+            source=self.fake.word(),
+            translation=self.fake.word(),
+            from_lang=self.language_from,
+            to_lang=self.language_to,
+        )
+        word_json = serializers.serialize("json", Word.objects.all())
+        sess = self.client.session
+        sess.update({'query_result': word_json})
+        sess.save()
+        data = {
+            'query_string': test_word.translation,
+            'language': '',
+        }
+        response = self.client.post(reverse('word:query'), data)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, reverse('word:query'))
+
     def test_word_get_word(self):
         response = self.client.get(reverse('word:get_word', args=[self.word.pk]))
         self.assertEqual(response.status_code, 200)

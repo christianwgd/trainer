@@ -87,9 +87,10 @@ class WordQueryView(LoginRequiredMixin, FormView):
     def form_valid(self, form):
         query_string = form.cleaned_data['query_string']
         language = form.cleaned_data['language']
-        if language is None:
+        if language == '':
             results = Word.objects.filter(
-                Q(source__icontains=query_string | Q(translation__icontains=query_string)),
+
+                Q(source__icontains=query_string) | Q(translation__icontains=query_string),
             )
         elif language == self.request.user.profile.learn.code:
             results = Word.objects.filter(source__icontains=query_string)
