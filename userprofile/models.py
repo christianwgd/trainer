@@ -18,7 +18,7 @@ class UserProfile(models.Model):
     )
     language = models.ForeignKey(
         Language, on_delete=models.PROTECT, related_name='profiles',
-        verbose_name=_('Language'), null=True, blank=True,
+        verbose_name=_('Source Language'), null=True, blank=True,
     )
     learn = models.ForeignKey(
         Language, on_delete=models.PROTECT, related_name='learners',

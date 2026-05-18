@@ -3,6 +3,7 @@ from random import shuffle
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core import serializers
+from django.db.models import Q
 from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.views.decorators.http import require_GET, require_POST
@@ -86,7 +87,11 @@ class WordQueryView(LoginRequiredMixin, FormView):
     def form_valid(self, form):
         query_string = form.cleaned_data['query_string']
         language = form.cleaned_data['language']
-        if language == self.request.user.profile.learn.code:
+        if language is None:
+            results = Word.objects.filter(
+                Q(source__icontains=query_string | Q(translation__icontains=query_string)),
+            )
+        elif language == self.request.user.profile.learn.code:
             results = Word.objects.filter(source__icontains=query_string)
         else:
             results = Word.objects.filter(translation__icontains=query_string)

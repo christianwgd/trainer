@@ -49,12 +49,14 @@ class WordQueryForm(forms.Form):
     language = forms.ChoiceField(
         label=_('Language'),
         choices=[],
+        required=False,
     )
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user')
         super().__init__(*args, **kwargs)
         self.fields['language'].choices = [
+            ('', _('All')),
             (user.profile.language.code, user.profile.language.name),
             (user.profile.learn.code, user.profile.learn.name),
         ]
