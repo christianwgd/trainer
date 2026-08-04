@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
-import sys
 from pathlib import Path
 
 from django.contrib import messages
@@ -27,7 +26,7 @@ PROJECT_APP = Path(PROJECT_APP_PATH).name
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv(
     "SECRET_KEY",
-    'django-insecure-8$n7a0e(i%=v6131ajsdp$53pvyegf^^%y7kirxgfm*djidgj('
+    'django-insecure-8$n7a0e(i%=v6131ajsdp$53pvyegf^^%y7kirxgfm*djidgj(',
 )
 
 LLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
