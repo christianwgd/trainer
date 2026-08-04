@@ -19,3 +19,5 @@ htmlcov/
 coverage.xml
 unittest.xml
 .ruff_cache/
+.env.*
+
