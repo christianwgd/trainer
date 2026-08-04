@@ -7,3 +7,4 @@ django-random-queryset==0.3.1
 django-select2==8.4.8
 psycopg==3.3.4
 psycopg-binary==3.3.4
+gunicorn==26.0.0

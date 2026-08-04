@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-import sys
+import os
 from pathlib import Path
 
 from django.contrib import messages
@@ -24,10 +24,18 @@ PROJECT_APP = Path(PROJECT_APP_PATH).name
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-8$n7a0e(i%=v6131ajsdp$53pvyegf^^%y7kirxgfm*djidgj('  # noqa: S105
+SECRET_KEY = os.getenv(
+    "SECRET_KEY",
+    'django-insecure-8$n7a0e(i%=v6131ajsdp$53pvyegf^^%y7kirxgfm*djidgj(',
+)
+
+LLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
+
+CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', 'http://localhost:8000').split(',')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'True')
 
 ALLOWED_HOSTS = []
 
@@ -95,8 +103,12 @@ WSGI_APPLICATION = 'trainer.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        "ENGINE": os.getenv('DB_ENGINE', 'django.db.backends.sqlite3'),
+        'NAME': os.getenv('DB_NAME', BASE_DIR / 'db.sqlite3'),
+        "USER": os.getenv('DB_USER', None),
+        "PASSWORD": os.getenv('DB_PASSWORD', None),
+        "HOST": os.getenv('DB_HOST', 'localhost'),
+        "PORT": os.getenv('DB_PORT', '5432'),
     },
 }
 
@@ -163,27 +175,3 @@ MESSAGE_TAGS = {
 
 # Bootstrap icons settings
 BS_ICONS_CACHE = Path(STATIC_URL) /'icon_cache'
-
-
-##################
-# LOCAL SETTINGS #
-##################
-
-# Allow any settings to be defined in local_settings.py which should be
-# ignored in your version control system allowing for settings to be
-# defined per machine.
-
-# Instead of doing "from .local_settings import *", we use exec so that
-# local_settings has full access to everything defined in this module.
-# Also, force into sys.modules so it's visible to Django's autoreload.
-
-local_settings_file = Path(PROJECT_APP_PATH) / "localsettings.py"
-if local_settings_file.exists():
-    import importlib
-    module_name = f"{PROJECT_APP}.localsettings"
-    module = importlib.import_module(module_name)
-    module.__file__ = str(local_settings_file)
-    sys.modules[module_name] = module
-    with Path.open(local_settings_file, "rb") as settings_file:
-        exec(settings_file.read())  # noqa: S102
-        settings_file.close()
