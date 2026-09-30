@@ -36,8 +36,8 @@
                 </button>
                 <div class="card-flip">
                     <!-- Card Front -->
-                    <div class="card front overflow-auto">
-                        <div class="card-text mt-4">
+                    <div class="card front">
+                        <div class="card-text mt-4 overflow-auto" style="max-height: 5rem;">
                             <p class="large mt-2">
                                 {% if reverse %}
                                     <span class="translation-{{ word.id }}">{{ word.translation }}</span>

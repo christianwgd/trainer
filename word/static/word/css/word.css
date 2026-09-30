@@ -24,7 +24,6 @@ input[type="checkbox"] {
 
 .card-text {
     padding: 0 15px;
-    max-height: 100%;
 }
 
 .card-flip div {
@@ -35,6 +34,7 @@ input[type="checkbox"] {
 .card {
     text-align: center;
 }
+
 .front {
     grid-area: frontAndBack;
     background-color: var(--bs-secondary-bg);
@@ -44,7 +44,7 @@ input[type="checkbox"] {
     grid-area: frontAndBack;
     transform: rotateY(-180deg);
     background-color: var(--bs-primary);
-    color: var(--bs-secondary-bg);
+    /*color: var(--bs-secondary-bg);*/
 }
 
 input[type="checkbox"]:checked + .card-container .card-flip {
