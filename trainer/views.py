@@ -12,7 +12,9 @@ DARK = _('Dark')
 
 @login_required
 def index(request):
-    return render(request, 'index.html', {})
+    return render(request, 'index.html', {
+        'recent_only': request.session.get('recent_only', False),
+    })
 
 
 def switch(request):

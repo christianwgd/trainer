@@ -19,6 +19,13 @@
 {% include 'word/word_modal_form.html' %}
 
 <div class="container">
+    {% if recent %}
+    <div class="row">
+        <div class="col text-center">
+            <p class="small">{% trans 'Learn only recent words' %}</p>
+        </div>
+    </div>
+    {% endif %}
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-3">
     {% for word in word_list %}
         <div class="col" id="col-{{ word.id }}">
@@ -51,7 +58,7 @@
 
                     <!-- Card Back -->
                     <div class="card back">
-                        <div class="card-text mt-2">
+                        <div class="card-text mt-2 overflow-auto" style="max-height: 5rem;">
                             {% if reverse %}
                                 <p class="small">
                                     <span class="translation-{{ word.id }}">{{ word.translation }}</span>

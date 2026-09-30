@@ -34,6 +34,7 @@ class UserProfileTest(TestCase):
         data = {
             'list_amount': 20,
             'pair_amount': 10,
+            'recent_days': 30,
             'language': self.lang.id,
             'learn': self.lang.id,
         }

@@ -21,7 +21,6 @@ class WordListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         amount = self.request.user.profile.list_amount
         exclude = self.request.user.profile.exclude.values_list('id', flat=True)
-        print(self.request.session.get('recent_only', False))
         if self.request.session.get('recent_only', False):
             start = now() - timedelta(days=self.request.user.profile.recent_days)
             words = Word.objects.filter(created__gte=start).exclude(id__in=exclude)
@@ -32,6 +31,7 @@ class WordListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['reverse'] = self.request.path.endswith('reverse/')
+        context['recent'] = self.request.session.get('recent_only', False)
         return context
 
 
@@ -48,7 +48,8 @@ class WordPairListView(LoginRequiredMixin, ListView):
             words = Word.objects.filter(created__gte=start).exclude(id__in=exclude)
         else:
             words = Word.objects.exclude(id__in=exclude)
-        return words.random(min(amount, words.count()))
+        self.queryset = words.random(amount)
+        return self.queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
