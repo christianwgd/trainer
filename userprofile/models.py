@@ -37,7 +37,7 @@ class UserProfile(models.Model):
         help_text=_('Amount of word pairs to show'),
     )
     recent_days = models.PositiveIntegerField(
-        default=7, verbose_name=_('Recent Days'),
+        default=30, verbose_name=_('Recent Days'),
         help_text=_('Amount of days to show in the recent words list'),
     )
 
