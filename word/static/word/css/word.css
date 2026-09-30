@@ -20,11 +20,11 @@ input[type="checkbox"] {
     grid-template-areas: "frontAndBack";
     transform-style: preserve-3d;
     transition: all 0.8s ease;
-    max-height: 100%;
 }
 
 .card-text {
     padding: 0 15px;
+    max-height: 100%;
 }
 
 .card-flip div {
