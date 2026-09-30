@@ -20,7 +20,6 @@ input[type="checkbox"] {
     grid-template-areas: "frontAndBack";
     transform-style: preserve-3d;
     transition: all 0.8s ease;
-    max-height: 100%;
 }
 
 .card-text {
@@ -35,6 +34,7 @@ input[type="checkbox"] {
 .card {
     text-align: center;
 }
+
 .front {
     grid-area: frontAndBack;
     background-color: var(--bs-secondary-bg);
@@ -44,7 +44,7 @@ input[type="checkbox"] {
     grid-area: frontAndBack;
     transform: rotateY(-180deg);
     background-color: var(--bs-primary);
-    color: var(--bs-secondary-bg);
+    /*color: var(--bs-secondary-bg);*/
 }
 
 input[type="checkbox"]:checked + .card-container .card-flip {
