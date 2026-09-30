@@ -39,6 +39,7 @@ urlpatterns = [
     path('', views.index, name='home'),
     path('switch/', views.switch, name='switch'),
     path('favicon.ico', RedirectView.as_view(url='/static/favicon/favicon.ico')),
+    path('toggle_recent/', views.toggle_session_recent, name='toggle_recent'),
 ]
 if settings.DEBUG:  # pragma: no cover
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

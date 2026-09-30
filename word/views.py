@@ -1,4 +1,5 @@
 import json
+from datetime import timedelta
 from random import shuffle
 
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -6,6 +7,7 @@ from django.core import serializers
 from django.db.models import Q
 from django.http import JsonResponse
 from django.urls import reverse_lazy
+from django.utils.timezone import now
 from django.views.decorators.http import require_GET, require_POST
 from django.views.generic import CreateView, FormView, ListView, UpdateView
 
@@ -19,11 +21,17 @@ class WordListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         amount = self.request.user.profile.list_amount
         exclude = self.request.user.profile.exclude.values_list('id', flat=True)
-        return Word.objects.exclude(id__in=exclude).random(min(amount, Word.objects.count()))
+        if self.request.session.get('recent_only', False):
+            start = now() - timedelta(days=self.request.user.profile.recent_days)
+            words = Word.objects.filter(created__gte=start).exclude(id__in=exclude)
+        else:
+            words = Word.objects.exclude(id__in=exclude)
+        return words.random(min(amount, words.count()))
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['reverse'] = self.request.path.endswith('reverse/')
+        context['recent'] = self.request.session.get('recent_only', False)
         return context
 
 
@@ -35,9 +43,13 @@ class WordPairListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         amount = self.request.user.profile.pair_amount
         exclude = self.request.user.profile.exclude.values_list('id', flat=True)
-        words = Word.objects.exclude(id__in=exclude).random(amount)
-        self.queryset = words
-        return words
+        if self.request.session.get('recent_only', False):
+            start = now() - timedelta(days=self.request.user.profile.recent_days)
+            words = Word.objects.filter(created__gte=start).exclude(id__in=exclude)
+        else:
+            words = Word.objects.exclude(id__in=exclude)
+        self.queryset = words.random(amount)
+        return self.queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

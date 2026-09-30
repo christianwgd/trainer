@@ -54,6 +54,30 @@ class TestTrainerViews(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.url, reverse('userprofile:update'))
 
+    def test_toggle_session_recent_not_set(self):
+        session = self.client.session
+        session.save()
+        self.assertFalse(session.get('recent_only', False))
+        self.client.force_login(self.user)
+        self.client.post(reverse('toggle_recent'))
+        self.assertTrue(self.client.session["recent_only"])
+
+    def test_toggle_session_recent_false_to_true(self):
+        session = self.client.session
+        session['recent_only'] = False
+        session.save()
+        self.client.force_login(self.user)
+        self.client.post(reverse('toggle_recent'))
+        self.assertTrue(self.client.session["recent_only"])
+
+    def test_toggle_session_recent_true_to_falase(self):
+        session = self.client.session
+        session['recent_only'] = True
+        session.save()
+        self.client.force_login(self.user)
+        self.client.post(reverse('toggle_recent'))
+        self.assertFalse(self.client.session["recent_only"])
+
 
 class TestLangFlagTags(TestCase):
 
