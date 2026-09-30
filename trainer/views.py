@@ -29,4 +29,5 @@ def switch(request):
 @require_POST
 def toggle_session_recent(request):
     request.session['recent_only'] = not(request.session.get('recent_only', False))
+    request.session.save()
     return JsonResponse({'result': 1})
