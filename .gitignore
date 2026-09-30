@@ -1,5 +1,5 @@
 .idea/
-/static/
+static/
 media/
 __pycache__/
 localsettings.py
