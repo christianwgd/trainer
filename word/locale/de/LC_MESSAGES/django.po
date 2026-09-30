@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-13 19:15+0100\n"
+"POT-Creation-Date: 2026-09-30 22:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,83 +18,94 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: apps.py:8 models.py:22 models.py:31
+#: apps.py:8 models.py:21 models.py:39 templates/word/word_modal_form.html:17
+#: templates/word/word_modal_form.html:19
 msgid "Word"
 msgstr "Wort"
 
-#: forms.py:29 tests.py:90
+#: forms.py:28 tests.py:91
 msgid "This word already exists."
 msgstr "Dieses Wort ist bereits vorhanden."
 
-#: forms.py:46
+#: forms.py:45
 msgid "Query String"
 msgstr "Suchbegriff"
 
-#: models.py:9 models.py:15
+#: forms.py:50 models.py:8 models.py:12
 msgid "Language"
 msgstr "Sprache"
 
-#: models.py:10
-msgid "Languages"
-msgstr "Sprachen"
+#: forms.py:59
+msgid "All"
+msgstr "Alle"
 
-#: models.py:16
+#: models.py:9
 msgid "Language code"
 msgstr "Sprachenkürzel"
 
-#: models.py:23
-msgid "Words"
-msgstr "Worte"
+#: models.py:13
+msgid "Languages"
+msgstr "Sprachen"
 
-#: models.py:32
+#: models.py:22 templates/word/word_modal_form.html:26
+#: templates/word/word_modal_form.html:28
 msgid "Translation"
 msgstr "Übersetzung"
+
+#: models.py:40
+msgid "Words"
+msgstr "Worte"
 
 #: templates/word/word_form.html:15
 msgid "New word"
 msgstr "Neues Wort"
 
-#: templates/word/word_form.html:17 templates/word/word_list.html:31
-#: templates/word/word_pairs.html:83
+#: templates/word/word_form.html:17 templates/word/word_list.html:41
+#: templates/word/word_modal_form.html:8 templates/word/word_pairs.html:86
+#: templates/word/word_query.html:42
 msgid "Update word"
 msgstr "Wort ändern"
 
-#: templates/word/word_form.html:36
+#: templates/word/word_form.html:36 templates/word/word_modal_form.html:38
 msgid "Ok"
 msgstr ""
 
-#: templates/word/word_form.html:39 templates/word/word_query.html:49
+#: templates/word/word_form.html:39 templates/word/word_query.html:60
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: templates/word/word_list.html:14
+#: templates/word/word_list.html:16
 msgid "Translate"
 msgstr "Übersetzen"
 
-#: templates/word/word_list.html:25 templates/word/word_pairs.html:77
+#: templates/word/word_list.html:25
+msgid "Learn only recent words"
+msgstr "Nur neue Worte lernen"
+
+#: templates/word/word_list.html:36 templates/word/word_pairs.html:81
 msgid "I know that, don't ask again!"
 msgstr "Weiß ich, nicht mehr fragen!"
 
-#: templates/word/word_pairs.html:66
+#: templates/word/word_pairs.html:68
 msgid "Assign"
 msgstr "Zuordnen"
 
-#: templates/word/word_query.html:13
+#: templates/word/word_query.html:15
 msgid "Query word"
 msgstr "Wort suchen"
 
-#: templates/word/word_query.html:37
+#: templates/word/word_query.html:48
 msgid "No results"
 msgstr "Keine Ergebnisse"
 
-#: templates/word/word_query.html:46
+#: templates/word/word_query.html:57
 msgid "Search"
 msgstr "Suchen"
 
-#: tests.py:22
+#: tests.py:23
 msgid "German"
 msgstr "Deutsch"
 
-#: tests.py:26
+#: tests.py:27
 msgid "Italian"
 msgstr "Italienisch"

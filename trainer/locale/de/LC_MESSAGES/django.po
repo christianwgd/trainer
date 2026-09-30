@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-25 19:35+0200\n"
+"POT-Creation-Date: 2026-09-30 22:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -312,7 +312,7 @@ msgid ""
 msgstr ""
 
 #: templates/base.html:35 templates/base.html:36 templates/base.html:44
-#: templates/index.html:8 urls.py:28
+#: urls.py:28
 msgid "Vocabulary Trainer"
 msgstr "Vokabel Trainer"
 
@@ -328,15 +328,15 @@ msgstr "Abmelden"
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: templates/base.html:81
+#: templates/base.html:82
 msgid "Password change"
 msgstr "Passwort ändern"
 
-#: templates/base.html:85
+#: templates/base.html:86
 msgid "Two factor authentication"
 msgstr "2-Faktor-Authentifizierung"
 
-#: templates/base.html:91
+#: templates/base.html:92
 msgid "Admin"
 msgstr ""
 
@@ -348,11 +348,15 @@ msgstr ""
 msgid "of"
 msgstr ""
 
-#: templates/index.html:13
+#: templates/index.html:19
 msgid "Welcome to your vocabulary trainer"
 msgstr "Willkommen zu deinem Vokabeltrainer"
 
-#: templates/index.html:33
+#: templates/index.html:25
+msgid "Learn only recent words"
+msgstr "Nur neue Worte lernen"
+
+#: templates/index.html:48
 msgid "Word Pairs"
 msgstr "Wortpaare"
 
@@ -666,10 +670,10 @@ msgstr "Neu"
 msgid "This functionality requires JavaScript."
 msgstr ""
 
-#: views.py:8
+#: views.py:9
 msgid "Light"
 msgstr "Hell"
 
-#: views.py:9
+#: views.py:10
 msgid "Dark"
 msgstr "Dunkel"
