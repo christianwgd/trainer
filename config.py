@@ -1,4 +1,4 @@
-bind = '0.0.0.0:8000'
+bind = '0.0.0.0:5003'
 backlog = 2048
 proc_name = 'trainer'
 restart = True
