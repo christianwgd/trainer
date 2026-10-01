@@ -17,6 +17,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Install dependencies
 COPY requirements.txt /app/
+RUN pip install -U pip
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy project
@@ -25,10 +26,13 @@ COPY . /app/
 # Create log and static directories
 RUN mkdir -p /app/log /app/static && chmod 777 /app/log /app/static
 
+RUN python manage.py migrate
+RUN python manage.py collectstatic --noinput
+
 # Expose port
 EXPOSE ${PORT:-8000}
 
 # Default commands
-CMD ["python", "manage.py", "migrate"]
-CMD ["python", "manage.py", "collectstatic", "--noinput"]
+#CMD ["python", "manage.py", "migrate"]
+#CMD ["python", "manage.py", "collectstatic", "--noinput"]
 CMD ["gunicorn", "-c", "config.py", "trainer.wsgi"]
