@@ -193,3 +193,25 @@ MESSAGE_TAGS = {
 
 # Bootstrap icons settings
 BS_ICONS_CACHE = Path(STATIC_URL) /'icon_cache'
+
+##################
+# LOCAL SETTINGS #
+##################
+
+# Allow any settings to be defined in local_settings.py which should be
+# ignored in your version control system allowing for settings to be
+# defined per machine.
+
+# Instead of doing "from .local_settings import *", we use exec so that
+# local_settings has full access to everything defined in this module.
+# Also force into sys.modules so it's visible to Django's autoreload.
+
+f = PROJECT_APP_PATH /'localsettings.py'
+if Path.exists(f):
+    import importlib
+    import sys
+    module_name = f'{PROJECT_APP}.localsettings'
+    module = importlib.import_module(module_name)
+    module.__file__ = f
+    sys.modules[module_name] = module
+    exec(f.open('rb').read())  # noqa: S102
