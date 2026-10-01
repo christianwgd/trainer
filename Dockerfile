@@ -25,11 +25,10 @@ COPY . /app/
 # Create log and static directories
 RUN mkdir -p /app/log /app/static && chmod 777 /app/log /app/static
 
-# Run collectstatic
-RUN python manage.py collectstatic --noinput
-
 # Expose port
 EXPOSE ${PORT:-8000}
 
-# Default command
+# Default commands
+CMD ["python", "manage.py", "migrate"]
+CMD ["python", "manage.py", "collectstatic", "--noinput"]
 CMD ["gunicorn", "-c", "config.py", "trainer.wsgi"]

@@ -5,6 +5,8 @@ django-bootstrap5==26.3
 django-bootstrap5-dark-mode-switch==0.2.2
 django-random-queryset==0.3.1
 django-select2==8.4.8
+gunicorn==26.2.0
 psycopg==3.3.6
 psycopg-binary==3.3.6
-gunicorn==26.2.0
+redis==8.1.0
+hiredis==3.4.2
