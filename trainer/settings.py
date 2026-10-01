@@ -75,8 +75,8 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
-SESSION_CACHE_ALIAS = 'sessions'
+# SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+# SESSION_CACHE_ALIAS = 'sessions'
 
 ROOT_URLCONF = 'trainer.urls'
 
@@ -98,23 +98,23 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'trainer.wsgi.application'
 
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": os.getenv("REDIS_URL", default="redis://redis:6379/0"),
-        "KEY_PREFIX": "cache",
-    },
-    "select2": {
-        "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": os.getenv("REDIS_URL", default="redis://redis:6379/0"),
-        "KEY_PREFIX": "select2",
-    },
-    "sessions": {
-        "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": os.getenv("REDIS_URL", default="redis://redis:6379/0"),
-        "KEY_PREFIX": "session",
-    },
-}
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django.core.cache.backends.redis.RedisCache",
+#         "LOCATION": os.getenv("REDIS_URL", default="redis://redis:6379/0"),
+#         "KEY_PREFIX": "cache",
+#     },
+#     "select2": {
+#         "BACKEND": "django.core.cache.backends.redis.RedisCache",
+#         "LOCATION": os.getenv("REDIS_URL", default="redis://redis:6379/0"),
+#         "KEY_PREFIX": "select2",
+#     },
+#     "sessions": {
+#         "BACKEND": "django.core.cache.backends.redis.RedisCache",
+#         "LOCATION": os.getenv("REDIS_URL", default="redis://redis:6379/0"),
+#         "KEY_PREFIX": "session",
+#     },
+# }
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
