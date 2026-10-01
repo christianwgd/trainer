@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-18 14:11+0200\n"
+"POT-Creation-Date: 2026-10-01 18:49+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,18 +54,26 @@ msgstr "Anzahl Wortpaare"
 msgid "Amount of word pairs to show"
 msgstr "Anzahl der anzuzeigenden Wortpaare"
 
+#: models.py:40
+msgid "Recent Days"
+msgstr "Anzahl Tage für neue Worte"
+
 #: models.py:41
+msgid "Amount of days to show in the recent words list"
+msgstr "Anzahl der Tage, für die Worte als 'neu' gelten"
+
+#: models.py:45
 msgid "User setting"
 msgstr "Benutzereinstellung"
 
-#: models.py:42 templates/userprofile/userprofile_form.html:17
+#: models.py:46 templates/userprofile/userprofile_form.html:17
 msgid "User settings"
 msgstr "Benutzereinstellungen"
 
-#: templates/userprofile/userprofile_form.html:53
+#: templates/userprofile/userprofile_form.html:58
 msgid "Ok"
 msgstr ""
 
-#: templates/userprofile/userprofile_form.html:56
+#: templates/userprofile/userprofile_form.html:61
 msgid "Cancel"
 msgstr "Abbrechen"

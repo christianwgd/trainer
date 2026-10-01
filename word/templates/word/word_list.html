@@ -22,7 +22,9 @@
     {% if recent %}
     <div class="row">
         <div class="col text-center">
-            <p class="small">{% trans 'Learn only recent words' %}</p>
+            <p class="small">
+                {% trans 'Learn only recent words' %} ({{ request.user.profile.recent_days }} {% trans 'Days' %})
+            </p>
         </div>
     </div>
     {% endif %}
