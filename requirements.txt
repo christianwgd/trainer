@@ -8,5 +8,3 @@ django-select2==8.4.8
 gunicorn==26.2.0
 psycopg==3.3.6
 psycopg-binary==3.3.6
-#redis==8.1.0
-#hiredis==3.4.2

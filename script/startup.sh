@@ -7,4 +7,4 @@ python manage.py migrate
 python manage.py collectstatic --noinput
 
 # Start the server
-gunicorn gunicorn -c config.py trainer.wsgi
+#gunicorn gunicorn -c config.py trainer.wsgi
